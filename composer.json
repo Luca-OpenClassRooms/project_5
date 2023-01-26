@@ -1,0 +1,15 @@
+{
+    "name": "luca/project_5",
+    "autoload": {
+        "psr-4": {
+            "Luca\\Blog\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luca-Sordetti",
+            "email": "91209271+Luca-Sordetti@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
