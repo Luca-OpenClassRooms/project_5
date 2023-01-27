@@ -2,7 +2,7 @@
     "name": "luca/project_5",
     "autoload": {
         "psr-4": {
-            "Luca\\Blog\\": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [
@@ -11,5 +11,9 @@
             "email": "91209271+Luca-Sordetti@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/routing": "^6.2",
+        "symfony/http-foundation": "^6.2",
+        "twig/twig": "^3.5"
+    }
 }

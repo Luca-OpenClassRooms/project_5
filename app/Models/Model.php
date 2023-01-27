@@ -1,6 +1,6 @@
 <?php
 
-namespace Luca\Blog;
+namespace App\Models;
 
 class Model 
 {

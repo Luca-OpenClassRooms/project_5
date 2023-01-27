@@ -1,6 +1,6 @@
 <?php
 
-namespace Luca\Blog;
+namespace App\Controllers;
 
 class Controller 
 {
