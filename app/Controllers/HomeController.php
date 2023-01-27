@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        var_dump($request);
+        return $this->render("index");
     }
 }
