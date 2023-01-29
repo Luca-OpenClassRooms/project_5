@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGenerator;
+
+use function PHPSTORM_META\type;
 
 class Router 
 {
@@ -60,9 +63,31 @@ class Router
         return $this->routes->add($name, $route);
     }
 
-    public function url(string $name, array $params = [])
+    /**
+     * Generate path for route name
+     *
+     * @param string $name
+     * @param [type] ...$args
+     * @return void
+     */
+    public function url(string $name, $params = [])
     {
-        return $this->routes->get($name)->getPath();
+        $generator = new UrlGenerator($this->routes, $this->context);
+        $route = $this->routes->get($name);
+        
+        if( gettype($params) !== "array" ){
+            $compiledRoute = $route->compile();
+            $variables = $compiledRoute->getVariables();
+            
+            $firstParams = array_values($variables)[0];
+
+            $newParams = [];
+            $newParams[$firstParams] = $params;
+
+            $params = $newParams;
+        }
+        
+        return $generator->generate($name, $params);
     }
 
     /**

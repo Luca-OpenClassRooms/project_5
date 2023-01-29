@@ -50,7 +50,7 @@ class LoginController extends Controller
 
         alert("success", "Connexion effectuée.");
 
-        return redirect("index");
+        return redirect("dashboard.index");
     }
 
     public function logout()

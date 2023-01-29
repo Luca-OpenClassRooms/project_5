@@ -59,16 +59,16 @@ if( !function_exists("alert") ){
 if( !function_exists("back") ){
     function back()
     {
-        header("Location: " . $_SERVER["PATH_INFO"]);
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     }
 }
 
 if( !function_exists("route") ){
-    function route(string $name, array $params = [])
+    function route(string $name, ...$args)
     {
         $instance = app("router");
-        return $instance->url($name, $params);
+        return $instance->url($name, ...$args);
     }
 }
 

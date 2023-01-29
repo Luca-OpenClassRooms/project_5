@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\Post;
 use Symfony\Component\HttpFoundation\Request;
 
-class BlogController extends Controller 
+class PostController extends Controller 
 {
     public function show(Request $request, string $slug)
     {

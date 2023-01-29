@@ -127,4 +127,39 @@ class Model
 
         return (object) array_merge(["id" => $lastInsertId], $data);
     }    
+
+    /**
+     * Update a instance of model
+     *
+     * @param array $data
+     * @return object
+     */
+    public function update(int $id, array $data)
+    {
+        $sqlTable = "";
+        $sqlValue = "";
+        
+        foreach($data as $k => $v)
+        {
+            $sqlTable .= "$k = :$k, ";
+        }
+
+        $sqlTable = substr($sqlTable, 0, -2);
+        $sqlValue = substr($sqlValue, 0, -2);
+
+        $this->db->query("UPDATE {$this->table} SET $sqlTable WHERE id = :id", [...$data, "id" => $id]);
+
+        return (object) array_merge(["id" => $id], $data);
+    }    
+
+    /**
+     * REmove a instance of model
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $this->db->query("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+    }
 }

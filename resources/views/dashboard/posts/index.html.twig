@@ -1,0 +1,58 @@
+{% extends "dashboard/layout.html.twig" %}
+
+{% block childcontent %}
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Commentaires</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts.data %}
+                <tr>
+                    <th scope="row">{{ post.id }}</th>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.slug }}</td>
+                    <td>{{ post.comments_count }}</td>
+                    <td class="text-center d-flex gap-2 justify-content-center">
+                        <a href="{{ route('dashboard.posts.edit', post.id) }}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                        <form action="#" method="POST" class="d-inline">
+                            <a href="#">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if posts.pages > 1 %}
+        <nav class="blog-nav nav nav-justified my-5 gap-2">
+            {% if posts.current > 1 %}
+            <a class="nav-link-prev nav-item nav-link rounded" href="?page={{ posts.current - 1 }}">
+                Précédent
+                <i class="arrow-prev fas fa-long-arrow-alt-left"></i>
+            </a>
+            {% endif %}
+
+            {% if posts.current < posts.pages %}
+            <a class="nav-link-next nav-item nav-link rounded" href="?page={{ posts.current + 1 }}">
+                Suivant
+                <i class="arrow-next fas fa-long-arrow-alt-right"></i>
+            </a>
+            {% endif %}
+        </nav>
+    {% endif %}
+
+    <a href="{{ route('dashboard.posts.create') }}" class="btn btn-primary">Ajouter un article</a>
+</div>
+{% endblock %}

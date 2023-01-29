@@ -40,12 +40,20 @@
 					<li class="nav-item">
 					    <a class="nav-link active" href="/"><i class="fas fa-home fa-fw me-2"></i>Accueil</a>
 					</li>
+					
 					<li class="nav-item">
 					    <a class="nav-link" href="/assets/CV-Luca_SORDETTI.pdf" target="_blank"><i class="fas fa-file-lines fa-fw me-2"></i>Mon CV</a>
 					</li>
-					<li class="nav-item">
-					    <a class="nav-link" href="/auth/login"><i class="fas fa-user fa-fw me-2"></i>Connexion</a>
-					</li>
+
+					{% if user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('dashboard.index') }}"><i class="fas fa-chart-line fa-fw me-2"></i>Tableau de bord</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="/auth/login"><i class="fas fa-user fa-fw me-2"></i>Connexion</a>
+						</li>
+					{% endif %}
 				</ul>
 				
 				<div class="my-2 my-md-3 w-100">

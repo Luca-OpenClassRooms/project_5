@@ -1,0 +1,42 @@
+{% extends "dashboard/layout.html.twig" %}
+
+{% set url = route('dashboard.posts.store') %}
+
+{% if post.id %}
+    {% set url = route('dashboard.posts.update', post.id) %}
+{% endif %}
+
+
+{% block childcontent %}
+<div>
+    <form action="{{ url }}" method="POST" class="d-flex flex-column gap-4">
+        <div class="d-flex gap-2">
+            <div class="form-group flex-fill">
+                <label for="title" class="mb-2">Titre</label>
+                <input class="form-control" type="text" id="title" name="title" placeholder="Ex: Mon super article" value="{{ post.title }}" /> 
+            </div>
+            <div class="form-group flex-fill">
+                <label for="slug" class="mb-2">Slug</label>
+                <input class="form-control" type="text" id="slug" name="slug" placeholder="Ex: mon-super-article" value="{{ post.slug }}" /> 
+            </div>
+        </div>
+        
+        <div class="form-group flex-fill">
+            <label for="author" class="mb-2">Auteur</label>
+            <input class="form-control" type="text" id="author" name="author" placeholder="Ex: Luca Sordetti" value="{{ post.author }}" /> 
+        </div>
+
+        <div class="form-group flex-fill">
+            <label for="short_content" class="mb-2">Chapô</label>
+            <textarea name="short_content" class="form-control" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti, illo?">{{ post.short_content }}</textarea>
+        </div>
+
+        <div class="form-group flex-fill">
+            <label for="content" class="mb-2">Contenu</label>
+            <textarea name="content" class="form-control" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti, illo?" rows="5">{{ post.content }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    </form>
+</div>
+{% endblock %}

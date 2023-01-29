@@ -1,0 +1,12 @@
+{% extends "dashboard/layout.html.twig" %}
+
+{% block childcontent %}
+<div>
+    <h3>Bonjour {{ user.first_name }},</h3>
+    <p>Bienvenue sur ton tableau de bord, ici tu pourra gérer tout le contenu de ton site !</p>
+
+    <form action="{{ route('auth.logout') }}" method="POST">
+        <button type="submit" class="btn btn-danger">Déconnexion</button>
+    </form>
+</div>
+{% endblock %}
