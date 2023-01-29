@@ -64,6 +64,23 @@ class Router
     }
 
     /**
+     * Add a delete route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @return void
+     */
+    public function delete($uri, $controller, string $name)
+    {
+        $route = new Route($uri, [
+            "_controller" => $controller
+        ]);
+        $route->setMethods(["DELETE"]);
+
+        return $this->routes->add($name, $route);
+    }
+
+    /**
      * Generate path for route name
      *
      * @param string $name

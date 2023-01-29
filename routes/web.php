@@ -21,3 +21,4 @@ $router->post("/dashboard/posts", "Dashboard\PostController@store", "dashboard.p
 
 $router->get("/dashboard/posts/{id}/edit", "Dashboard\PostController@edit", "dashboard.posts.edit");
 $router->post("/dashboard/posts/{id}", "Dashboard\PostController@update", "dashboard.posts.update");
+$router->post("/dashboard/posts/{id}/delete", "Dashboard\PostController@destroy", "dashboard.posts.destroy");

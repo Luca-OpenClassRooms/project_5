@@ -24,10 +24,10 @@
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <form action="#" method="POST" class="d-inline">
-                            <a href="#">
+                        <form action="{{ route('dashboard.posts.destroy', post.id) }}" method="POST" class="d-inline">
+                            <button class="btn-link" type="submit">
                                 <i class="fa-solid fa-trash"></i>
-                            </a>
+                            </button>
                         </form>
                     </td>
                 </tr>
