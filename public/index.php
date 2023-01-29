@@ -7,5 +7,16 @@ if( session_status() == PHP_SESSION_NONE ) {
 // Load libraries
 require_once "../vendor/autoload.php";
 
-// Load router & routes
-require_once "../routes/web.php";
+// Load environements variables
+$dotenv = Dotenv\Dotenv::createImmutable("../");
+$dotenv->load();
+
+// Load App
+$app = \App\Core\App::getInstance();
+
+$app->register("config", \App\Core\Config::class);
+$app->register("router", \App\Core\Router::class);
+
+require_once "../app/functions.php";
+
+echo $app->run();

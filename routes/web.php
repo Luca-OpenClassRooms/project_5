@@ -1,10 +1,8 @@
 <?php
 
-use App\Core\Router;
+$app = \App\Core\App::getInstance();
 
-$router = new Router();
+$router = $app->get("router");
 
 $router->get("/", "HomeController@index");
 $router->get("/blog/{id}", "BlogController@show");
-
-$router->match();

@@ -14,7 +14,7 @@ class Router
     private $routes;
     private $context;
     private $request;
-    
+        
     public function __construct()
     {
         $this->request = Request::createFromGlobals();
@@ -26,6 +26,13 @@ class Router
         $this->context = $context;
     }
 
+    /**
+     * Add a get route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @return void
+     */
     public function get($uri, $controller)
     {
         $route = new Route($uri, [
@@ -36,6 +43,13 @@ class Router
         return $this->routes->add($uri, $route);
     }
 
+    /**
+     * Add a post route
+     *
+     * @param string $uri
+     * @param string $controller
+     * @return void
+     */
     public function post($uri, $controller)
     {
         $route = new Route($uri, [
@@ -46,8 +60,16 @@ class Router
         return $this->routes->add($uri, $route);
     }
 
-    public function match()
+    /**
+     * Run the module
+     *
+     * @return void
+     */
+    public function run()
     {
+        // Load routes
+        include_once "../routes/web.php";
+
         $context = $this->context;
         $matcher = new UrlMatcher($this->routes, $context);
         $parameters = $matcher->match($context->getPathInfo());

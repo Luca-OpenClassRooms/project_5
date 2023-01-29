@@ -17,3 +17,10 @@ composer install
 ```
 cp .env.example .env
 ```
+
+## Start app 
+
+Start the server on http://127.0.0.1:8000
+```
+php serve.php
+```
