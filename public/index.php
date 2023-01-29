@@ -15,6 +15,7 @@ $dotenv->load();
 $app = \App\Core\App::getInstance();
 
 $app->register("config", \App\Core\Config::class);
+$app->register("database", \App\Core\Database::class);
 $app->register("router", \App\Core\Router::class);
 
 require_once "../app/functions.php";

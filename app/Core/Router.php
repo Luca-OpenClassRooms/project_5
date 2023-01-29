@@ -87,8 +87,14 @@ class Router
         if( !method_exists($class, $methodName) )
             return die("Method controller not found.");
 
-        echo call_user_func_array([$class, $methodName], [
-            $this->request
-        ]);
+
+        $args = [
+            $this->request,
+            ...array_filter($parameters, function($v, $k){
+                return $k[0] != "_";
+            }, ARRAY_FILTER_USE_BOTH)
+        ];
+
+        echo call_user_func_array([$class, $methodName], $args);
     }
 }

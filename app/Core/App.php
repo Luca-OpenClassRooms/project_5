@@ -51,7 +51,9 @@ class App
 
         foreach($this->modules as $module)
         {
-            $res = $module->run();
+            if( method_exists($module, "run") ){
+                $res = $module->run();
+            }
         }
 
         return $res;

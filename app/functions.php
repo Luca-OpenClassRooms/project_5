@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\App;
+
 if( !function_exists("env") ){
     function env(string $name, string $default = null)
     {
@@ -18,5 +20,19 @@ if( !function_exists("dd") ){
         var_dump(...$args);
         echo "</pre>";
         exit();
+    }
+}
+
+if( !function_exists("config") ){
+    function config(string $name = null)
+    {
+        $app = App::getInstance();
+        $instance = $app->get("config");
+
+        if( isset($name) ){
+            return $instance->get($name);
+        }
+
+        return $instance;
     }
 }
