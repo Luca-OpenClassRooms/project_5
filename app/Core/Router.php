@@ -33,14 +33,14 @@ class Router
      * @param string $controller
      * @return void
      */
-    public function get($uri, $controller)
+    public function get($uri, $controller, string $name)
     {
         $route = new Route($uri, [
             "_controller" => $controller
         ]);
         $route->setMethods(["GET"]);
 
-        return $this->routes->add($uri, $route);
+        return $this->routes->add($name, $route);
     }
 
     /**
@@ -50,14 +50,19 @@ class Router
      * @param string $controller
      * @return void
      */
-    public function post($uri, $controller)
+    public function post($uri, $controller, string $name)
     {
         $route = new Route($uri, [
             "_controller" => $controller
         ]);
         $route->setMethods(["POST"]);
 
-        return $this->routes->add($uri, $route);
+        return $this->routes->add($name, $route);
+    }
+
+    public function url(string $name, array $params = [])
+    {
+        return $this->routes->get($name)->getPath();
     }
 
     /**

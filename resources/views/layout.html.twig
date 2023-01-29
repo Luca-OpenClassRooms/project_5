@@ -43,6 +43,9 @@
 					<li class="nav-item">
 					    <a class="nav-link" href="/assets/CV-Luca_SORDETTI.pdf" target="_blank"><i class="fas fa-file-lines fa-fw me-2"></i>Mon CV</a>
 					</li>
+					<li class="nav-item">
+					    <a class="nav-link" href="/auth/login"><i class="fas fa-user fa-fw me-2"></i>Connexion</a>
+					</li>
 				</ul>
 				
 				<div class="my-2 my-md-3 w-100">
@@ -53,6 +56,29 @@
     </header>
     
     <div class="main-wrapper">
+		{% if cta_description %}
+			<section class="cta-section theme-bg-light py-5">
+				<div class="container text-center single-col-max-width">
+					<h2 class="heading">{{ cta_title }}</h2>
+					<div class="intro">{{ cta_description }}</div>
+				</div>
+			</section>
+		{% endif %}
+
+
+		{% if session.alerts %}
+			<section class="px-3 py-5 px-md-5 pb-0">
+				<div class="container single-col-max-width">
+					{% for type, data in session.alerts %}
+						{% for alert in data %}
+							<div class="alert alert-{{ type == "error" ? 'danger' : type }}">{{ alert }}</div>
+						{% endfor %}
+					{% endfor %}
+				</div>
+			</section>
+		{% endif %}
+
+		{% block cta %}{% endblock %}
         {% block content %} {% endblock %}
 
 	    <footer class="footer text-center py-2 theme-bg-dark">

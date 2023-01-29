@@ -66,14 +66,14 @@ class Model
     }
 
     /**
-     * Find entry by id
+     * Find entry by key
      *
      * @param integer $id
      * @return object|false
      */
-    public function findById(int $id)
+    public function findBy(string $key, string $value)
     {
-        return $this->db->query("SELECT * FROM {$this->table} WHERE id = ?", [$id])->fetch();
+        return $this->db->query("SELECT * FROM {$this->table} WHERE {$key} = ?", [$value])->fetch();
     }
 
     /**
@@ -101,4 +101,30 @@ class Model
             "data" => $this->all(),
         ];
     }
+
+    /**
+     * Create a new instance of model
+     *
+     * @param array $data
+     * @return object
+     */
+    public function create(array $data)
+    {
+        $sqlTable = "";
+        $sqlValue = "";
+        
+        foreach($data as $k => $v)
+        {
+            $sqlTable .= "$k, ";
+            $sqlValue .= ":$k, ";
+        }
+
+        $sqlTable = substr($sqlTable, 0, -2);
+        $sqlValue = substr($sqlValue, 0, -2);
+
+        $this->db->query("INSERT INTO {$this->table}($sqlTable) VALUES($sqlValue)", $data);
+        $lastInsertId = $this->db->lastInsertId();
+
+        return (object) array_merge(["id" => $lastInsertId], $data);
+    }    
 }

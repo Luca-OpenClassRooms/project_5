@@ -13,6 +13,7 @@ class Controller
         $this->twig = new \Twig\Environment($this->loader, [
             'cache' => false,
         ]);
+        $this->twig->addGlobal('session', $_SESSION);
     }
 
     protected function render($view, $params = [])

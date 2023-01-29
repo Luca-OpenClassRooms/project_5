@@ -7,76 +7,66 @@ use PDOException;
 
 class Database
 {
-    private static $_instance;
-
     private $pdo;
     
-    public $connected = false;
-
     /**
-     * Connect to the database
+     * Récupération de l'instance de PDO
      *
-     * @return void
+     * @return \PDO
      */
-    public function connect()
+    public function getPDO()
     {
+        if( $this->pdo != null )
+            return $this->pdo;
+
+        $host = config("database.host");
+        $port = config("database.port");
+        $username = config("database.username");
+        $password = config("database.password");
+        $dbname = config("database.database");
+        
         try{
-            $host = config("database.host");
-            $port = config("database.port");
-            $username = config("database.username");
-            $password = config("database.password");
-            $dbname = config("database.database");
-
-            $this->pdo = new PDO("mysql:dbname=$dbname;host=$host;port=$port", $username, $password);
+            $pdo = new \PDO(
+                "mysql:dbname=$dbname;host=$host;port=$port", $username, $password, 
+                [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]
+            );
     
-            $this->pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES \'UTF8\'');
-            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);        
+        
+            $this->pdo = $pdo;
+        } catch(\PDOExecption $e) {
+            dd($e->getMessage());
+        }
 
-            $this->connected = true;
-        } catch(PDOException $e) {
-            die($e->getMessage());
-        }        
+        return $this->pdo;
     }
 
     /**
-     * Query database
+     * Return last insert id
      *
-     * @param string $query
-     * @param array $params
      * @return void
      */
-    public function query(string $query, array $params = [])
+    public function lastInsertId()
     {
-        if( !$this->connected ) $this->connect();
+        $pdo = $this->getPDO();
+        return $pdo->lastInsertId();
+    }
 
-        $pdo = $this->pdo;
+    /**
+     * Execuse SQL request
+     *
+     * @param string $sql
+     * @param array $params
+     * @return \PDOStatement
+     */
+    public function query(string $sql, array $params = []): \PDOStatement
+    {
+        $pdo = $this->getPDO();
 
-        $req = $pdo->prepare($query);
-        
-        if( $req === false ){
-            return $this;
-        }
-
-        foreach($params as $k => $v){
-            $req->bindValue($k + 1, $v);
-        }
-        
-        $req->execute();
+        $req = $pdo->prepare($sql);
+        $req->execute($params);
 
         return $req;
     }
-
-    /**
-     * Get instance of database
-     *
-     * @return this
-     */
-    public static function getInstance()
-    {   
-        if( is_null(self::$_instance) ){
-            self::$_instance = new Database();
-        }
-
-        return self::$_instance;
-    }    
 }
