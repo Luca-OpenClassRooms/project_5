@@ -53,7 +53,7 @@ class Model
         $name = strtolower($name);
         $lastChar = $name[strlen($name) - 1];
 
-        switch($lastChar) {
+        switch ($lastChar) {
             case 'y':
                 return substr($name, 0, -1) . 'ies';
             case 's':
@@ -123,7 +123,7 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach(array_keys($data) as $v)
+        foreach (array_keys($data) as $v)
         {
             $sqlTable .= "$v, ";
             $sqlValue .= ":$v, ";
@@ -149,7 +149,7 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach(array_keys($data) as $v)
+        foreach (array_keys($data) as $v)
         {
             $sqlTable .= "$v = :$v, ";
         }

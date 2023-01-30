@@ -4,10 +4,26 @@ namespace App\Core;
 
 class App 
 {
+
+    /**
+     * Instance of the application
+     *
+     * @var App
+     */
     protected static $_instance;
 
+    /**
+     * Registered modules
+     *
+     * @var array
+     */
     private $modules = [];
 
+    /**
+     * Get instance of the application
+     *
+     * @return App
+     */
     public static function getInstance()
     {
         if (self::$_instance === null) {

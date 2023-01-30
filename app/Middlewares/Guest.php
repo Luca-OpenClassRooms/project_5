@@ -4,7 +4,7 @@ namespace App\Middlewares;
 
 class Guest
 {
-    
+
     /**
      * Process middleware
      *

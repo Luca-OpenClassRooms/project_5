@@ -59,7 +59,7 @@ if (!function_exists("alert")) {
 if (!function_exists("back")) {
     function back()
     {
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        header("Location: ".$_SERVER['HTTP_REFERER']);
         exit(0);
     }
 }
@@ -75,7 +75,7 @@ if (!function_exists("route")) {
 if (!function_exists("redirect")) {
     function redirect(...$args)
     {
-        header("Location: " . route(...$args));
+        header("Location: ".route(...$args));
         exit(0);
     }
 }
