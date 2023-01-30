@@ -16,8 +16,10 @@ class SeederController extends Controller
      */
     public function index(Request $request)
     {
-        if( env("APP_ENV") !== "local" )
-            die("Local mode only, check your .env file");
+        if( env("APP_ENV") !== "local" ){
+            echo "Local mode only, check your .env file";
+            exit(1);
+        }
 
         $user = (new User)->create([
             "first_name" => "Luca",

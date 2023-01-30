@@ -31,7 +31,7 @@ if( !function_exists("dd") ){
         echo "<pre>";
         var_dump(...$args);
         echo "</pre>";
-        exit();
+        exit(1);
     }
 }
 
@@ -60,7 +60,7 @@ if( !function_exists("back") ){
     function back()
     {
         header("Location: " . $_SERVER['HTTP_REFERER']);
-        exit();
+        exit(0);
     }
 }
 
@@ -76,6 +76,6 @@ if( !function_exists("redirect") ){
     function redirect(...$args)
     {
         header("Location: " . route(...$args));
-        exit();
+        exit(0);
     }
 }

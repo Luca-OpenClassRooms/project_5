@@ -190,13 +190,17 @@ class Router
         $className = "App\Controllers\\" . $controller[0];
         $methodName = $controller[1];
 
-        if( !class_exists($className) )
-            return die("Controller not found.");
+        if( !class_exists($className) ){
+            echo "Controller not found.";
+            exit(2);
+        }
         
         $class = new $className();
 
-        if( !method_exists($class, $methodName) )
-            return die("Method controller not found.");
+        if( !method_exists($class, $methodName) ){
+            echo "Method controller not found.";
+            exit(2);
+        }
 
 
         $args = [
