@@ -2,22 +2,22 @@
 
 use App\Core\App;
 
-if( !function_exists("app") ){
+if (!function_exists("app")) {
     function app(?string $module)
     {
         $instance = App::getInstance();
 
-        if( $module )
+        if ($module)
             $instance = $instance->get($module);
 
         return $instance;
     }
 }
 
-if( !function_exists("env") ){
+if (!function_exists("env")) {
     function env(string $name, string $default = null)
     {
-        if( isset($_ENV[$name]) && !empty($_ENV[$name]) ){
+        if (isset($_ENV[$name]) && !empty($_ENV[$name])) {
             return $_ENV[$name];
         }
 
@@ -25,7 +25,7 @@ if( !function_exists("env") ){
     }
 }
 
-if( !function_exists("dd") ){
+if (!function_exists("dd")) {
     function dd(...$args)
     {
         echo "<pre>";
@@ -35,12 +35,12 @@ if( !function_exists("dd") ){
     }
 }
 
-if( !function_exists("config") ){
+if (!function_exists("config")) {
     function config(string $name = null)
     {
         $instance = app("config");
 
-        if( isset($name) ){
+        if (isset($name)) {
             return $instance->get($name);
         }
 
@@ -48,7 +48,7 @@ if( !function_exists("config") ){
     }
 }
 
-if( !function_exists("alert") ){
+if (!function_exists("alert")) {
     function alert(string $type, string $content)
     {
         $instance = app("alert");
@@ -56,7 +56,7 @@ if( !function_exists("alert") ){
     }
 }
 
-if( !function_exists("back") ){
+if (!function_exists("back")) {
     function back()
     {
         header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -64,7 +64,7 @@ if( !function_exists("back") ){
     }
 }
 
-if( !function_exists("route") ){
+if (!function_exists("route")) {
     function route(string $name, ...$args)
     {
         $instance = app("router");
@@ -72,7 +72,7 @@ if( !function_exists("route") ){
     }
 }
 
-if( !function_exists("redirect") ){
+if (!function_exists("redirect")) {
     function redirect(...$args)
     {
         header("Location: " . route(...$args));

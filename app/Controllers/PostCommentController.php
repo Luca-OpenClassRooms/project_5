@@ -25,7 +25,7 @@ class PostCommentController extends Controller
 
         $post = (new Post)->findBy("slug", $slug);
 
-        if( !$post ) return back();
+        if (!$post) return back();
 
         $data["post_id"] = $post->id;
         $data["user_id"] = $_SESSION["user"]->id;

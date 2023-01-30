@@ -5,7 +5,7 @@ if( session_status() == PHP_SESSION_NONE ) {
 }
 
 // Load libraries
-require_once "../vendor/autoload.php";
+include_once "../vendor/autoload.php";
 
 // Load environements variables
 $dotenv = Dotenv\Dotenv::createImmutable("../");
@@ -19,6 +19,6 @@ $app->register("database", \App\Core\Database::class);
 $app->register("router", \App\Core\Router::class);
 $app->register("alert", \App\Core\Alert::class);
 
-require_once "../app/functions.php";
+include_once "../app/functions.php";
 
 echo $app->run();

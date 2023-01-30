@@ -14,9 +14,7 @@ class Controller
     public function __construct()
     {
         $this->loader = new \Twig\Loader\FilesystemLoader("../resources/views");
-        $this->twig = new \Twig\Environment($this->loader, [
-            'cache' => false,
-        ]);
+        $this->twig = new \Twig\Environment($this->loader, ['cache' => false]);
         $this->twig->addGlobal('session', $_SESSION);
         $this->twig->addGlobal('user', $_SESSION["user"] ?? false);
         $this->twig->addGlobal("is_admin", isset($_SESSION["user"]) && $_SESSION["user"]->is_admin);
@@ -25,6 +23,7 @@ class Controller
         }));
     }
 
+    
     /**
      * Render a twig template
      *

@@ -4,14 +4,15 @@ namespace App\Models;
 
 class PostComment extends Model
 {
+
     private string $hiddenSQL = "";
 
     public function __construct(private int $postId, private bool $showHidden = false)
     {
         parent::__construct();
 
-        if( !$this->showHidden ) {
-            if( isset($_SESSION["user"]) ){
+        if (!$this->showHidden) {
+            if (isset($_SESSION["user"])) {
                 $this->hiddenSQL = "AND (validated = 1 OR user_id = {$_SESSION["user"]->id})";
             } else {
                 $this->hiddenSQL = "AND validated = 1";

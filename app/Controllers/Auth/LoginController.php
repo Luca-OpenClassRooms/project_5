@@ -29,19 +29,19 @@ class LoginController extends Controller
         $email = $request->get("email");
         $password = $request->get("password");
 
-        if( !filter_var($email, FILTER_VALIDATE_EMAIL) ){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             alert("error", "E-mail invalide.");
             return back();
         }
 
         $user = (new User())->findBy("email", $email);
 
-        if( !$user ){
+        if (!$user) {
             alert("error", "Identifiants incorrect.");
             return back();
         }
 
-        if( !password_verify($password, $user->password) ){
+        if (!password_verify($password, $user->password)) {
             alert("error", "Identifiants incorrect.");
             return back();
         }

@@ -4,7 +4,7 @@ namespace App\Controllers\Dashboard;
 
 use App\Controllers\Controller;
 
-class IndexController extends Controller 
+class IndexController extends Controller
 {
     /**
      * Display index

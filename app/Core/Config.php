@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-class Config 
+class Config
 {
     private $data = [];
 
@@ -27,6 +27,7 @@ class Config
         return $data;
     }
 
+
     /**
      * Run the module
      *
@@ -40,12 +41,10 @@ class Config
         
         foreach($files as $file)
         {
-            if( file_exists("../config/" . $file) ){
-                $data = require_once "../config/" . $file;
-                $name = str_replace(".php", "", $file);
+            $data = @require_once "../config/" . $file;
+            $name = str_replace(".php", "", $file);
 
-                $this->data[$name] = $data;
-            }
+            $this->data[$name] = $data;
         }
     }
 }

@@ -13,7 +13,7 @@ class SeederController extends Controller
      */
     public function index()
     {
-        if( env("APP_ENV") !== "local" ){
+        if (env("APP_ENV") !== "local") {
             return "Local mode only, check your .env file";
         }
 

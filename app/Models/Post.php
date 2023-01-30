@@ -24,10 +24,11 @@ class Post extends Model
         ")->fetchAll();
     }
 
+
     /**
      * Find a entry of table
      *
-     * @param integer $id
+     * @param string $slug
      * @return mixed
      */
     public function find(string $slug)
