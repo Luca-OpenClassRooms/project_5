@@ -98,6 +98,8 @@ class PostController extends Controller
             "content" => "required",
         ]);
 
+        $data["updated_at"] = date("Y-m-d H:i:s");
+
         (new Post)->update($id, $data);
 
         alert("success", "Article modifié avec succès.");

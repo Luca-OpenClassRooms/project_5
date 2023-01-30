@@ -23,7 +23,7 @@ class PostController extends Controller
         
         $comments = (new PostComment($post->id, isset($_SESSION["user"])))->paginate(
             $request->query->get("page", 1), 
-            $request->query->get("perPage", 1)
+            $request->query->get("perPage", 5)
         );
 
         return $this->render("post", compact("post", "comments"));
