@@ -13,7 +13,7 @@
 </head>
 <body class="dark-mode">
     <header class="header text-center">	    
-	    <h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="index.html">Luca SORDETTI</a></h1>
+	    <h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="{{ route('index') }}">Luca SORDETTI</a></h1>
         
 	    <nav class="navbar navbar-expand-lg navbar-dark" >
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,13 +40,13 @@
 					<li class="nav-item">
 					    <a class="nav-link" href="{{ route('index') }}"><i class="fas fa-home fa-fw me-2"></i>Accueil</a>
 					</li>
-					
+				
 					<li class="nav-item">
-					    <a class="nav-link" href="/assets/CV-Luca_SORDETTI.pdf" target="_blank"><i class="fas fa-file-lines fa-fw me-2"></i>Mon CV</a>
+					    <a class="nav-link" href="/contact"><i class="fas fa-address-book fa-fw me-2"></i>Contact</a>
 					</li>
 
 					<li class="nav-item">
-					    <a class="nav-link" href="/contact"><i class="fas fa-address-book fa-fw me-2"></i>Contact</a>
+					    <a class="nav-link" href="/assets/CV-Luca_SORDETTI.pdf" target="_blank"><i class="fas fa-file-lines fa-fw me-2"></i>Mon CV</a>
 					</li>
 
 					{% if is_admin %}
@@ -78,7 +78,6 @@
 				</div>
 			</section>
 		{% endif %}
-
 
 		{% if session.alerts %}
 			<section class="px-3 py-5 px-md-5 pb-0">

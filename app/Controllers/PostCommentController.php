@@ -20,7 +20,6 @@ class PostCommentController extends Controller
         $data = $request->request->all();
 
         $this->validate($request, [
-            "name" => "required|max:255",
             "content" => "required|max:500",
         ]);
 

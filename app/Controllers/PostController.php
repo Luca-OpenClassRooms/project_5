@@ -21,7 +21,7 @@ class PostController extends Controller
 
         if( !$post ) return redirect("index");
         
-        $comments = (new PostComment($post->id, isset($_SESSION["user"])))->paginate(
+        $comments = (new PostComment($post->id, isset($_SESSION["user"]) && $_SESSION["user"]->is_admin))->paginate(
             $request->query->get("page", 1), 
             $request->query->get("perPage", 5)
         );

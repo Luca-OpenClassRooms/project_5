@@ -30,10 +30,10 @@
                 {% for comment in comments.data %}
                     <div class="col-12">
                         <div class="d-flex gap-2 align-items-center">
-                            <p class="m-0 fs-4">{{ comment.name }}</p>
+                            <p class="m-0 fs-4">{{ comment.first_name }} {{ comment.last_name }}</p>
                             <small class="m-0">{{ comment.created_at|date("d/m/Y à H:i") }}</small>
 
-                            {% if user %}
+                            {% if is_admin %}
                                 <form action="{{ route('comments.update', comment.id) }}" method="POST">
                                     <button type="submit" class="btn-link p-0">
                                         {% if comment.validated %}
@@ -48,6 +48,8 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
+                            {% elseif comment.validated != 1 %}
+                                <small class="text-danger">(Non vérifié)</small>
                             {% endif %}
                         </div>
 
@@ -84,11 +86,6 @@
 
             {% if user %}
                 <form action="{{ route('comments.store', post.slug) }}" method="POST" class="d-flex flex-column gap-4">
-                    <div class="form-group">
-                        <label for="name" class="mb-2">Nom</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder="Ex: John Doe" /> 
-                    </div>
-
                     <div class="form-group">
                         <label for="content" class="mb-2">Message</label>
                         <textarea name="content" id="content" rows="3" class="form-control" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, culpa!"></textarea>
