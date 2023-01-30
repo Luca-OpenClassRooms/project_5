@@ -37,11 +37,10 @@ class PostController extends Controller
     /**
      * Display edit page
      *
-     * @param Request $request
      * @param integer $id
      * @return void
      */
-    public function edit(Request $request, int $id)
+    public function edit(int $id)
     {
         $post = (new Post)->findBy("id", $id);
 
@@ -109,11 +108,10 @@ class PostController extends Controller
     /**
      * Remove a post
      *
-     * @param Request $request
      * @param integer $id
      * @return void
      */
-    public function destroy(Request $request, int $id)
+    public function destroy(int $id)
     {
         (new Post)->delete($id);
         alert("success", "Article supprimé avec succès.");

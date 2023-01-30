@@ -39,11 +39,10 @@ class PostCommentController extends Controller
     /**
      * Update a comment status
      *
-     * @param Request $request
      * @param integer $id
      * @return void
      */
-    public function update(Request $request, int $id)
+    public function update(int $id)
     {
         $comment = (new PostComment(0))->find($id);
 
@@ -60,11 +59,10 @@ class PostCommentController extends Controller
     /**
      * Remove a comment
      *
-     * @param Request $request
      * @param integer $id
      * @return void
      */
-    public function destroy(Request $request, int $id)
+    public function destroy(int $id)
     {
         $comment = (new PostComment(0))->find($id);
 

@@ -10,9 +10,6 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
-use MakiseCo\Middleware\MiddlewarePipeFactory;
-use MakiseCo\Middleware\MiddlewareResolver;
-
 class Router 
 {
     private $routes;

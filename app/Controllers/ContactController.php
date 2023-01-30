@@ -13,10 +13,9 @@ class ContactController extends Controller
     /**
      * Display contact form
      *
-     * @param Request $request
      * @return void
      */
-    public function index(Request $request)
+    public function index()
     {
         return $this->render("contact");
     }

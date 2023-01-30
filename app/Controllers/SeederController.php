@@ -2,25 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Request;
 
 class SeederController extends Controller 
 {
     /**
      * Seed database
      *
-     * @param Request $request
      * @return void
      */
-    public function index(Request $request)
+    public function index()
     {
         if( env("APP_ENV") !== "local" ){
             return "Local mode only, check your .env file";
         }
 
-        $user = (new User)->create([
+        (new User)->create([
             "first_name" => "Luca",
             "last_name" => "Sordetti",
             "email" => "root@root.fr",
