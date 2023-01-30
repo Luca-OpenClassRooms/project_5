@@ -33,10 +33,25 @@
 
         <div class="form-group flex-fill">
             <label for="content" class="mb-2">Contenu</label>
-            <textarea name="content" class="form-control" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti, illo?" rows="5">{{ post.content }}</textarea>
+            
+            <textarea name="content" id="editor">{{ post.content }}</textarea>
+            {# <textarea name="content" class="form-control" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti, illo?" rows="5">{{ post.content }}</textarea> #}
         </div>
 
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
 </div>
+{% endblock %}
+
+{% block footer %}
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector( '#editor' ), {
+            height: 500
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 {% endblock %}

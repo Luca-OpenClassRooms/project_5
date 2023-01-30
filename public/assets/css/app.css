@@ -7,6 +7,19 @@ body.dark-mode .social-list a {
     border: none;
 }
 
+.ck-editor__editable_inline {
+    color: black;
+    min-height: 400px;
+}
+
+.ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4, .ck-content h5, .ck-content h6{
+    color: black !important;
+}
+
+.blog-post-body img{
+    width: 100%;
+}
+
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

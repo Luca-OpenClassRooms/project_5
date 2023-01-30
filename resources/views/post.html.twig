@@ -7,7 +7,7 @@
             <h2 class="title mb-2">{{ post.title }}</h2>
             <div class="meta mb-3">
                 <span class="date">Dernière mise à jour : {{ post.updated_at|date("d/m/Y à H:i") }}</span>
-                <span class="comment"><a class="text-link" href="#">4 commentaires</a></span>
+                <span class="comment"><a class="text-link" href="#">{{ comments.total }} commentaires</a></span>
             </div>
         </header>
         
@@ -17,10 +17,6 @@
             </p>
             
             <div>
-                <figure class="blog-banner">
-                    <img class="img-fluid" src="/assets/images/blog/blog-post-banner.jpg" alt="image">
-                </figure>
-
                 {{ post.content | raw }}
             </div>
         </div>
