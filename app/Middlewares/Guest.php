@@ -4,6 +4,7 @@ namespace App\Middlewares;
 
 class Guest
 {
+    
     /**
      * Process middleware
      *
@@ -14,4 +15,5 @@ class Guest
         if (isset($_SESSION["user"]) && !empty($_SESSION["user"]))
             return redirect("dashboard.index");
     }
+
 }

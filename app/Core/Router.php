@@ -33,7 +33,7 @@ class Router
      * @var Request
      */
     private $request;
-        
+
     public function __construct()
     {
         $this->request = Request::createFromGlobals();
@@ -123,7 +123,7 @@ class Router
 
         foreach($router->routes->all() as $k => $route)
         {
-            $route->setPath($prefix . $route->getPath());
+            $route->setPath($prefix.$route->getPath());
             $currentMiddleware = $route->getDefault("_middleware") ?? [];
             $route->addDefaults(["_middleware" => [...$currentMiddleware, ...$middleware]]);
 

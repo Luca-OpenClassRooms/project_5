@@ -53,4 +53,5 @@ class Config
             $this->data[$name] = $data;
         }
     }
+    
 }

@@ -41,7 +41,7 @@ class Controller
     /**
      * Render a twig template
      *
-     * @param [type] $view
+     * @param string $view
      * @param array $params
      * @return void
      */

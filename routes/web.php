@@ -22,7 +22,7 @@ $router->group([
 });
 
 $router->group([
-    "prefix" => "auth", 
+    "prefix" => "auth",
     "as" => "auth."
 ], function($router){
     $router->group(["middleware" => ["guest"]], function ($router) {
