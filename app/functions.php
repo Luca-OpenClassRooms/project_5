@@ -31,7 +31,7 @@ if( !function_exists("dd") ){
         echo "<pre>";
         var_dump(...$args);
         echo "</pre>";
-        exit(1);
+        exit(0);
     }
 }
 

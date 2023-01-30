@@ -192,14 +192,14 @@ class Router
 
         if( !class_exists($className) ){
             echo "Controller not found.";
-            exit(2);
+            return;
         }
         
         $class = new $className();
 
         if( !method_exists($class, $methodName) ){
             echo "Method controller not found.";
-            exit(2);
+            return;
         }
 
 
