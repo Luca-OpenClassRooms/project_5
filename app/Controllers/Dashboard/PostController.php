@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         $posts = (new Post)->paginate(
             $request->query->get("page", 1), 
-            $request->query->get("perPage", 10)
+            $request->query->get("perPage", 5)
         );
 
         return $this->render("dashboard/posts/index", compact("posts"));

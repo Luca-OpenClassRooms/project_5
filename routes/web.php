@@ -12,7 +12,7 @@ $router->post("/posts/{slug}/comments", "PostCommentController@store", "comments
 $router->group([
     "prefix" => "comments",
     "as" => "comments.",
-    "middleware" => ["auth"]
+    "middleware" => ["admin"]
 ], function($router){
     $router->post("/{id}", "PostCommentController@update", "update");
     $router->post("/{id}/delete", "PostCommentController@destroy", "destroy");
@@ -22,6 +22,9 @@ $router->group(["prefix" => "auth", "as" => "auth."], function($router){
     $router->group(["middleware" => ["guest"]], function($router){
         $router->get("/login", "Auth\LoginController@index", "login");
         $router->post("/login", "Auth\LoginController@authentificate", "authentificate");
+
+        $router->get("/register", "Auth\RegisterController@index", "register");
+        $router->post("/register", "Auth\RegisterController@store", "register.store");
     });
     
     $router->group(["middleware" => ["auth"]], function($router){
@@ -34,7 +37,7 @@ $router->get("/seed", "SeederController@index", "seed.index");
 $router->group([
     "prefix" => "dashboard", 
     "as" => "dashboard.",
-    "middleware" => ["auth"]
+    "middleware" => ["admin"]
 ], function($router){
     $router->get("", "Dashboard\IndexController@index", "index");
     $router->get("/posts", "Dashboard\PostController@index", "posts.index");

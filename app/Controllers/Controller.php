@@ -19,6 +19,7 @@ class Controller
         ]);
         $this->twig->addGlobal('session', $_SESSION);
         $this->twig->addGlobal('user', $_SESSION["user"] ?? false);
+        $this->twig->addGlobal("is_admin", isset($_SESSION["user"]) && $_SESSION["user"]->is_admin);
         $this->twig->addFunction(new TwigFunction("route", function(...$args){
             return route(...$args);
         }));
