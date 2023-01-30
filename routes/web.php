@@ -5,7 +5,12 @@ $app = \App\Core\App::getInstance();
 $router = $app->get("router");
 
 $router->get("/", "HomeController@index", "index");
-$router->get("/blog/{slug}", "PostController@show", "blog.show");
+
+$router->get("/posts/{slug}", "PostController@show", "posts.show");
+
+$router->post("/posts/{slug}/comments", "PostCommentController@store", "comments.store");
+$router->post("/comments/{id}", "PostCommentController@update", "comments.update");
+$router->post("/comments/{id}/delete", "PostCommentController@destroy", "comments.destroy");
 
 $router->get("/auth/login", "Auth\LoginController@index", "auth.login");
 $router->post("/auth/login", "Auth\LoginController@authentificate", "auth.authentificate");
@@ -13,12 +18,18 @@ $router->post("/auth/logout", "Auth\LoginController@logout", "auth.logout");
 
 $router->get("/seed", "SeederController@index", "seed.index");
 
-$router->get("/dashboard", "Dashboard\IndexController@index", "dashboard.index");
-$router->get("/dashboard/posts", "Dashboard\PostController@index", "dashboard.posts.index");
+$router->group([
+    "prefix" => "dashboard", 
+    "as" => "dashboard.",
+    "middleware" => ["auth"]
+], function($router){
+    $router->get("", "Dashboard\IndexController@index", "index");
+    $router->get("/posts", "Dashboard\PostController@index", "posts.index");
+    
+    $router->get("/posts/create", "Dashboard\PostController@create", "posts.create");
+    $router->post("/posts", "Dashboard\PostController@store", "posts.store");
 
-$router->get("/dashboard/posts/create", "Dashboard\PostController@create", "dashboard.posts.create");
-$router->post("/dashboard/posts", "Dashboard\PostController@store", "dashboard.posts.store");
-
-$router->get("/dashboard/posts/{id}/edit", "Dashboard\PostController@edit", "dashboard.posts.edit");
-$router->post("/dashboard/posts/{id}", "Dashboard\PostController@update", "dashboard.posts.update");
-$router->post("/dashboard/posts/{id}/delete", "Dashboard\PostController@destroy", "dashboard.posts.destroy");
+    $router->get("/posts/{id}/edit", "Dashboard\PostController@edit", "posts.edit");
+    $router->post("/posts/{id}", "Dashboard\PostController@update", "posts.update");
+    $router->post("/posts/{id}/delete", "Dashboard\PostController@destroy", "posts.destroy");
+});

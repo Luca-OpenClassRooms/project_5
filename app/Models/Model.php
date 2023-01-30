@@ -40,7 +40,11 @@ class Model
     {
         $className = (new \ReflectionClass($this))->getShortName();
 
-        $name = strtolower($className);
+        $arr = preg_replace("([A-Z])", " $0", $className);
+        $arr = explode(" ",trim($arr));
+
+        $name = join("_", $arr);
+        $name = strtolower($name);
         $lastChar = $name[strlen($name) - 1];
 
         switch($lastChar) {

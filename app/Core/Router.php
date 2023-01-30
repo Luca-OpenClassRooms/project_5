@@ -17,6 +17,8 @@ class Router
     private $routes;
     private $context;
     private $request;
+
+    private array $_middleware = []; 
         
     public function __construct()
     {
@@ -27,6 +29,15 @@ class Router
 
         $this->routes = new RouteCollection();
         $this->context = $context;
+    }
+
+    public function setMiddleware(string|array $middleware)
+    {
+        if( gettype($middleware) != "array" ){
+            $middleware = [...$middleware];
+        }
+
+        $this->_middleware = $middleware;
     }
 
     /**
@@ -43,7 +54,9 @@ class Router
         ]);
         $route->setMethods(["GET"]);
 
-        return $this->routes->add($name, $route);
+        $this->routes->add($name, $route);
+
+        return $route;
     }
 
     /**
@@ -60,7 +73,9 @@ class Router
         ]);
         $route->setMethods(["POST"]);
 
-        return $this->routes->add($name, $route);
+        $this->routes->add($name, $route);
+
+        return $route;
     }
 
     /**
@@ -77,7 +92,39 @@ class Router
         ]);
         $route->setMethods(["DELETE"]);
 
-        return $this->routes->add($name, $route);
+        $this->routes->add($name, $route);
+
+        return $route;
+    }
+
+    public function group(array $params , callable $callback)
+    {
+        $router = new Router();
+
+        $prefix = "";
+        $as = "";
+        $middleware = [];
+
+        if( isset($params["prefix"]) ){
+            $prefix = $params["prefix"];
+        }
+
+        if( isset($params["middleware"]) ){
+            $middleware = $params["middleware"];
+        }
+
+        if( isset($params["as"]) ){
+            $as = $params["as"];
+        }
+
+        $callback($router);
+
+        foreach($router->routes->all() as $k => $route)
+        {
+            $route->setPath($prefix . $route->getPath());
+
+            $this->routes->add($as . $k, $route);
+        }
     }
 
     /**
@@ -105,6 +152,11 @@ class Router
         }
         
         return $generator->generate($name, $params);
+    }
+
+    public function collection()
+    {
+        return $this->routes;
     }
 
     /**
