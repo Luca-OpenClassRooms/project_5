@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RegisterController extends Controller
 {
 
-    
+
     /**
      * Display register page
      *

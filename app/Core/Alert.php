@@ -12,7 +12,7 @@ class Alert
             $_SESSION["alerts"] = [];
         }
     }
-    
+
 
     /**
      * Add alert to session

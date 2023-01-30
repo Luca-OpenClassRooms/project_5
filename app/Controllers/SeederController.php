@@ -7,7 +7,7 @@ use App\Models\User;
 class SeederController extends Controller 
 {
 
-    
+
     /**
      * Seed database
      *

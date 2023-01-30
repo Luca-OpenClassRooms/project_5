@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PostController extends Controller 
 {
 
-    
+
     /**
      * Return post page
      *

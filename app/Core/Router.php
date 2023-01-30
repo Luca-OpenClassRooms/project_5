@@ -127,7 +127,7 @@ class Router
             $currentMiddleware = $route->getDefault("_middleware") ?? [];
             $route->addDefaults(["_middleware" => [...$currentMiddleware, ...$middleware]]);
 
-            $this->routes->add($as . $k, $route);
+            $this->routes->add($as.$k, $route);
         }
     }
 
@@ -234,5 +234,5 @@ class Router
         return call_user_func_array([$class, $methodName], $args);
     }
 
-    
+
 }
