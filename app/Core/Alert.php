@@ -6,7 +6,7 @@ class Alert
 {
     public function __construct()
     {
-        if( !isset($_SESSION["alerts"]) ){
+        if (!isset($_SESSION["alerts"])) {
             $_SESSION["alerts"] = [];
         }
     }
@@ -20,13 +20,18 @@ class Alert
      */
     public function add(string $type, string $message)
     {
-        if( !isset($_SESSION["alerts"][$type]) ){
+        if (!isset($_SESSION["alerts"][$type])) {
             $_SESSION["alerts"][$type] = [];
         }
 
         $_SESSION["alerts"][$type][] = $message;
     }
-
+    
+    /**
+     * Run the module
+     *
+     * @return void
+     */
     public function run()
     {
         $_SESSION["alerts"] = [];

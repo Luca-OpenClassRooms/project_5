@@ -47,9 +47,7 @@ class ContactController extends Controller
             ->to(env("MAIL_FROM_ADDRESS"))
             ->replyTo($data["email"])
             ->subject("Nouveau message de : {$data["first_name"]} {$data["last_name"]}")
-            ->html($this->render("emails/contact", [
-                ...$data
-            ]));
+            ->html($this->render("emails/contact", [...$data]));
 
         $mailer->send($email);
 

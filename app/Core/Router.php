@@ -10,10 +10,28 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
-class Router 
+class Router
 {
+
+    /**
+     * Routes collection
+     *
+     * @var RouteCollection
+     */
     private $routes;
+
+    /**
+     * Current HTTP Context
+     *
+     * @var RequestContext
+     */
     private $context;
+
+    /**
+     * Current HTTP Request
+     *
+     * @var Request
+     */
     private $request;
         
     public function __construct()
@@ -36,9 +54,7 @@ class Router
      */
     public function get($uri, $controller, string $name)
     {
-        $route = new Route($uri, [
-            "_controller" => $controller
-        ]);
+        $route = new Route($uri, ["_controller" => $controller]);
         $route->setMethods(["GET"]);
 
         $this->routes->add($name, $route);
@@ -55,9 +71,7 @@ class Router
      */
     public function post($uri, $controller, string $name)
     {
-        $route = new Route($uri, [
-            "_controller" => $controller
-        ]);
+        $route = new Route($uri, ["_controller" => $controller]);
         $route->setMethods(["POST"]);
 
         $this->routes->add($name, $route);
@@ -74,9 +88,7 @@ class Router
      */
     public function delete($uri, $controller, string $name)
     {
-        $route = new Route($uri, [
-            "_controller" => $controller
-        ]);
+        $route = new Route($uri, ["_controller" => $controller]);
         $route->setMethods(["DELETE"]);
 
         $this->routes->add($name, $route);
@@ -92,18 +104,18 @@ class Router
         $as = "";
         $middleware = [];
 
-        if( isset($params["prefix"]) ){
+        if (isset($params["prefix"])) {
             $prefix = $params["prefix"];
         }
 
-        if( isset($params["middleware"]) ){
-            if( gettype($params["middleware"]) !== "array" )
+        if (isset($params["middleware"])) {
+            if (gettype($params["middleware"]) !== "array")
                 $params["middleware"] = [...$params["middleware"]];
 
             $middleware = $params["middleware"];
         }
 
-        if( isset($params["as"]) ){
+        if (isset($params["as"])) {
             $as = $params["as"];
         }
 
@@ -113,9 +125,7 @@ class Router
         {
             $route->setPath($prefix . $route->getPath());
             $currentMiddleware = $route->getDefault("_middleware") ?? [];
-            $route->addDefaults([
-                "_middleware" => [...$currentMiddleware, ...$middleware]
-            ]);
+            $route->addDefaults(["_middleware" => [...$currentMiddleware, ...$middleware]]);
 
             $this->routes->add($as . $k, $route);
         }
@@ -133,7 +143,7 @@ class Router
         $generator = new UrlGenerator($this->routes, $this->context);
         $route = $this->routes->get($name);
         
-        if( gettype($params) !== "array" ){
+        if (gettype($params) !== "array") {
             $compiledRoute = $route->compile();
             $variables = $compiledRoute->getVariables();
             
@@ -169,7 +179,7 @@ class Router
 
         $middlewares = $parameters["_middleware"] ?? [];
 
-        if( count($middlewares) > 0 ){
+        if (count($middlewares) > 0) {
             $middlewareList = [];
 
             foreach($middlewares as $middleware){
@@ -184,17 +194,17 @@ class Router
 
         $controller = explode("@", $parameters["_controller"]);
 
-        $className = "App\Controllers\\" . $controller[0];
+        $className = "App\Controllers\\".$controller[0];
         $methodName = $controller[1];
 
-        if( !class_exists($className) ){
+        if (!class_exists($className)) {
             echo "Controller not found.";
             return;
         }
         
         $class = new $className();
 
-        if( !method_exists($class, $methodName) ){
+        if (!method_exists($class, $methodName)) {
             echo "Method controller not found.";
             return;
         }
@@ -212,11 +222,11 @@ class Router
 
             $arg = null;
 
-            if( $exist !== false ){
+            if ($exist !== false) {
                 $arg = $parameters[$name] ?? null;
             }
 
-            if( $name == "request" ){
+            if ($name == "request") {
                 $arg = $this->request;
             }
 

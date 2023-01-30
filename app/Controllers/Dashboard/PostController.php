@@ -24,6 +24,7 @@ class PostController extends Controller
         return $this->render("dashboard/posts/index", compact("posts"));
     }
 
+
     /**
      * Display create page
      *
@@ -65,7 +66,7 @@ class PostController extends Controller
             "slug" => "required|max:255",
             "author" => "required|max:255",
             "short_content" => "required",
-            "content" => "required",
+            "content" => "required"
         ]);
 
         (new Post)->create($data);
