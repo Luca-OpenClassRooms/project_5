@@ -4,9 +4,15 @@ namespace App\Models;
 
 class PostComment extends Model
 {
-    public function __construct(private int $postId)
+    private string $hiddenSQL = "";
+
+    public function __construct(private int $postId, private bool $showHidden = false)
     {
         parent::__construct();
+
+        if( !$this->showHidden ) {
+            $this->hiddenSQL = "AND validated = 1";
+        }
     }
     /**
      * Get all entries of table
@@ -17,7 +23,9 @@ class PostComment extends Model
     {
         return $this->db->query("
             SELECT * FROM {$this->table} 
-            WHERE post_id = ?
+            WHERE post_id = ? {$this->hiddenSQL}
+            ORDER BY id DESC
+            {$this->limit}
         ", [$this->postId])->fetchAll();
     }
 
@@ -31,4 +39,30 @@ class PostComment extends Model
     {
         return $this->db->query("SELECT * FROM {$this->table} WHERE id = ?", [$id])->fetch();
     }
+
+    /**
+     * Get pagination limit
+     *
+     * @param integer $current
+     * @param integer $perPage
+     * @return void
+     */
+    public function paginate(int $current, int $perPage)
+    {
+        $count = $this->db->query("SELECT COUNT(*) as count FROM {$this->table} WHERE post_id = ? {$this->hiddenSQL}", [$this->postId])->fetch();
+        $nbData = $count->count;
+
+        $pages = ceil($nbData / $perPage);
+        $first = ($current * $perPage) - $perPage;
+
+        $this->limit = "LIMIT $first, $perPage";
+
+        return [
+            "total" => $nbData,
+            "pages" => $pages,
+            "current" => $current,
+            "perPage" => $perPage,
+            "data" => $this->all(),
+        ];
+    }    
 }

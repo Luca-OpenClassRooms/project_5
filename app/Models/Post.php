@@ -16,7 +16,7 @@ class Post extends Model
             (
                 SELECT COUNT(*)
                 FROM post_comments as c
-                WHERE c.id = p.id
+                WHERE c.post_id = p.id AND c.validated = 1
             ) AS comments_count
             FROM {$this->table} as p
             ORDER BY created_at DESC

@@ -20,6 +20,24 @@ body.dark-mode .social-list a {
     width: 100%;
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination .page-link{
+    border-radius: 5px;
+    background: #1e2a3a;
+    color: white;
+    border: none;
+}
+
+.pagination .page-link:hover{
+    background-color: var(--bs-primary);
+    color: white;
+}
+
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

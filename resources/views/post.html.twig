@@ -25,8 +25,8 @@
             <hr>
     
             <div class="row g-3">
-            {% if comments is not empty %}
-                {% for comment in comments %}
+            {% if comments.total > 0 %}
+                {% for comment in comments.data %}
                     <div class="col-12">
                         <div class="d-flex gap-2 align-items-center">
                             <p class="m-0 fs-4">{{ comment.name }}</p>
@@ -55,6 +55,24 @@
                         <hr>
                     </div>
                 {% endfor %}
+
+                {% if comments.pages > 1 %}
+                    <nav aria-label="Navigation des commentaires">
+                        <ul class="pagination">
+                            {% if comments.current > 1 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ comments.current - 1 }}">Précédent</a></li>
+                            {% endif %}
+                            
+                            {% for page in 1..comments.pages %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                            {% endfor %}
+
+                            {% if comments.current < comments.pages %}
+                                <li class="page-item"><a class="page-link" href="?page={{ comments.current + 1 }}">Suviant</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
             {% else %}
                 <div class="col-12">
                     <small>Cette article ne possède aucun commentaire.</small>

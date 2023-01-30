@@ -21,7 +21,10 @@ class PostController extends Controller
 
         if( !$post ) return redirect("index");
         
-        $comments = (new PostComment($post->id))->all();
+        $comments = (new PostComment($post->id, isset($_SESSION["user"])))->paginate(
+            $request->query->get("page", 1), 
+            $request->query->get("perPage", 1)
+        );
 
         return $this->render("post", compact("post", "comments"));
     }
