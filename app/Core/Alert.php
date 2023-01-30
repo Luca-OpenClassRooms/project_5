@@ -4,8 +4,6 @@ namespace App\Core;
 
 class Alert
 {
-
-
     public function __construct()
     {
         if (!isset($_SESSION["alerts"])) {
@@ -39,6 +37,4 @@ class Alert
     {
         $_SESSION["alerts"] = [];
     }
-
-
 }

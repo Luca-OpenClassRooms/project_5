@@ -4,7 +4,6 @@ namespace App\Core;
 
 class App 
 {
-
     /**
      * Instance of the application
      *

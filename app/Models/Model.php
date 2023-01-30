@@ -6,7 +6,6 @@ use App\Core\App;
 
 class Model
 {
-
     /**
      * Instance of database
      *

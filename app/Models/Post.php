@@ -4,8 +4,6 @@ namespace App\Models;
 
 class Post extends Model
 {
-
-    
     /**
      * Get all entries of table
      *

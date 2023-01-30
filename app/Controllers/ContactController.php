@@ -10,8 +10,6 @@ use Symfony\Component\Mime\Email;
 
 class ContactController extends Controller 
 {
-
-
     /**
      * Display contact form
      *

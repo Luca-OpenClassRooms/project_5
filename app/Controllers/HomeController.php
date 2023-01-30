@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller 
 {
-
-
     /**
      * Display all posts
      *

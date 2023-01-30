@@ -4,7 +4,6 @@ namespace App\Core;
 
 class Config
 {
-    
     /**
      * Config data
      *
@@ -47,12 +46,10 @@ class Config
         
         foreach($files as $file)
         {
-            $data = @require_once "../config/" . $file;
+            $data = @require_once "../config/".$file;
             $name = str_replace(".php", "", $file);
 
             $this->data[$name] = $data;
         }
     }
-
-    
 }

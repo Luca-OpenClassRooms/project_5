@@ -4,7 +4,6 @@ namespace App\Models;
 
 class PostComment extends Model
 {
-
     private string $hiddenSQL = "";
 
     public function __construct(private int $postId, private bool $showHidden = false)

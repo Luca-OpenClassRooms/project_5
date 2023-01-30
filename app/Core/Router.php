@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class Router
 {
-
     /**
      * Routes collection
      *
@@ -183,7 +182,7 @@ class Router
             $middlewareList = [];
 
             foreach($middlewares as $middleware){
-                $class = "App\Middlewares\\" . ucfirst(strtolower($middleware));
+                $class = "App\Middlewares\\".ucfirst(strtolower($middleware));
                 $middlewareList[] = new $class();
             }
 
@@ -233,6 +232,4 @@ class Router
 
         return call_user_func_array([$class, $methodName], $args);
     }
-
-
 }

@@ -4,7 +4,6 @@ namespace App\Middlewares;
 
 class Auth
 {
-
     /**
      * Process middleware
      *
@@ -15,5 +14,4 @@ class Auth
         if (!isset($_SESSION["user"]) || empty($_SESSION["user"]))
             return redirect("index");
     }
-
 }

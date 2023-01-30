@@ -10,7 +10,6 @@ use Rakit\Validation\Validator;
 
 class Controller
 {
-
     /**
      * Twig loader
      *
@@ -47,7 +46,7 @@ class Controller
      */
     protected function render($view, $params=[])
     {
-        return $this->twig->render($view . ".html.twig", $params);
+        return $this->twig->render($view.".html.twig", $params);
     }
 
     /**
