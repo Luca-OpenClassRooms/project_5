@@ -8,6 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PostCommentController extends Controller 
 {
+    /**
+     * Store a new comment on a post
+     *
+     * @param Request $request
+     * @param string $slug
+     * @return void
+     */
     public function store(Request $request, string $slug)
     {
         $data = $request->request->all();
@@ -29,6 +36,13 @@ class PostCommentController extends Controller
         return back();
     }
 
+    /**
+     * Update a comment status
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return void
+     */
     public function update(Request $request, int $id)
     {
         $comment = (new PostComment(0))->find($id);
@@ -43,6 +57,13 @@ class PostCommentController extends Controller
         return back();
     }
 
+    /**
+     * Remove a comment
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return void
+     */
     public function destroy(Request $request, int $id)
     {
         $comment = (new PostComment(0))->find($id);

@@ -7,14 +7,27 @@ $router = $app->get("router");
 $router->get("/", "HomeController@index", "index");
 
 $router->get("/posts/{slug}", "PostController@show", "posts.show");
-
 $router->post("/posts/{slug}/comments", "PostCommentController@store", "comments.store");
-$router->post("/comments/{id}", "PostCommentController@update", "comments.update");
-$router->post("/comments/{id}/delete", "PostCommentController@destroy", "comments.destroy");
 
-$router->get("/auth/login", "Auth\LoginController@index", "auth.login");
-$router->post("/auth/login", "Auth\LoginController@authentificate", "auth.authentificate");
-$router->post("/auth/logout", "Auth\LoginController@logout", "auth.logout");
+$router->group([
+    "prefix" => "comments",
+    "as" => "comments.",
+    "middleware" => ["auth"]
+], function($router){
+    $router->post("/{id}", "PostCommentController@update", "update");
+    $router->post("/{id}/delete", "PostCommentController@destroy", "destroy");
+});
+
+$router->group(["prefix" => "auth", "as" => "auth."], function($router){
+    $router->group(["middleware" => ["guest"]], function($router){
+        $router->get("/login", "Auth\LoginController@index", "login");
+        $router->post("/login", "Auth\LoginController@authentificate", "authentificate");
+    });
+    
+    $router->group(["middleware" => ["auth"]], function($router){
+        $router->post("/logout", "Auth\LoginController@logout", "logout");
+    });
+});
 
 $router->get("/seed", "SeederController@index", "seed.index");
 

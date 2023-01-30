@@ -21,6 +21,12 @@ class PostComment extends Model
         ", [$this->postId])->fetchAll();
     }
 
+    /**
+     * Find a entry of table
+     *
+     * @param integer $id
+     * @return mixed
+     */
     public function find(int $id)
     {
         return $this->db->query("SELECT * FROM {$this->table} WHERE id = ?", [$id])->fetch();

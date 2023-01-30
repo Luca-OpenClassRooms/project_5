@@ -53,6 +53,11 @@ class LoginController extends Controller
         return redirect("dashboard.index");
     }
 
+    /**
+     * Logout current user
+     *
+     * @return void
+     */
     public function logout()
     {
         unset($_SESSION["user"]);

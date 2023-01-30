@@ -24,6 +24,12 @@ class Post extends Model
         ")->fetchAll();
     }
 
+    /**
+     * Find a entry of table
+     *
+     * @param integer $id
+     * @return mixed
+     */
     public function find(string $slug)
     {
         return $this->db->query("SELECT * FROM {$this->table} WHERE slug = ?", [$slug])->fetch();

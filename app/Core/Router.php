@@ -10,15 +10,14 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
-use function PHPSTORM_META\type;
+use MakiseCo\Middleware\MiddlewarePipeFactory;
+use MakiseCo\Middleware\MiddlewareResolver;
 
 class Router 
 {
     private $routes;
     private $context;
     private $request;
-
-    private array $_middleware = []; 
         
     public function __construct()
     {
@@ -29,15 +28,6 @@ class Router
 
         $this->routes = new RouteCollection();
         $this->context = $context;
-    }
-
-    public function setMiddleware(string|array $middleware)
-    {
-        if( gettype($middleware) != "array" ){
-            $middleware = [...$middleware];
-        }
-
-        $this->_middleware = $middleware;
     }
 
     /**
@@ -110,6 +100,9 @@ class Router
         }
 
         if( isset($params["middleware"]) ){
+            if( gettype($params["middleware"]) !== "array" )
+                $params["middleware"] = [...$params["middleware"]];
+
             $middleware = $params["middleware"];
         }
 
@@ -122,6 +115,10 @@ class Router
         foreach($router->routes->all() as $k => $route)
         {
             $route->setPath($prefix . $route->getPath());
+            $currentMiddleware = $route->getDefault("_middleware") ?? [];
+            $route->addDefaults([
+                "_middleware" => [...$currentMiddleware, ...$middleware]
+            ]);
 
             $this->routes->add($as . $k, $route);
         }
@@ -172,6 +169,21 @@ class Router
         $context = $this->context;
         $matcher = new UrlMatcher($this->routes, $context);
         $parameters = $matcher->match($context->getPathInfo());
+
+        $middlewares = $parameters["_middleware"] ?? [];
+
+        if( count($middlewares) > 0 ){
+            $middlewareList = [];
+
+            foreach($middlewares as $middleware){
+                $class = "App\Middlewares\\" . ucfirst(strtolower($middleware));
+                $middlewareList[] = new $class();
+            }
+
+            foreach ($middlewareList as $middleware) {
+                $middleware->process($this->request);
+            }
+        }
 
         $controller = explode("@", $parameters["_controller"]);
 
