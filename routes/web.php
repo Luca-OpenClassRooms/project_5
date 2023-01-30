@@ -6,6 +6,9 @@ $router = $app->get("router");
 
 $router->get("/", "HomeController@index", "index");
 
+$router->get("/contact", "ContactController@index", "contact");
+$router->post("/contact", "ContactController@store", "contact.store");
+
 $router->get("/posts/{slug}", "PostController@show", "posts.show");
 $router->post("/posts/{slug}/comments", "PostCommentController@store", "comments.store");
 

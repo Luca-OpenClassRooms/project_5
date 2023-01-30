@@ -1,0 +1,36 @@
+{% extends "layout.html.twig" %}
+
+{% set cta_title = "Contact" %}
+{% set cta_description = "Remplissez le formulaire ci-dessous afin de me contacter." %}
+
+{% block content %}
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container single-col-max-width">
+        <form action="{{ route('contact.store') }}"method="POST" class="d-flex flex-column gap-4">
+            <div class="d-flex gap-2">
+                <div class="form-group flex-fill">
+                    <label for="first_name" class="mb-2">Prénom</label>
+                    <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Ex: John" /> 
+                </div>
+                
+                <div class="form-group flex-fill">
+                    <label for="last_name" class="mb-2">Nom</label>
+                    <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Ex: Doe" /> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="mb-2">E-Mail</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="Ex: john.doe@gmail.com" /> 
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="mb-2">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Ex: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus harum officiis unde architecto iusto fugiat."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

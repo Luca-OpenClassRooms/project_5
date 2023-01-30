@@ -29,6 +29,7 @@ class PostCommentController extends Controller
         if( !$post ) return back();
 
         $data["post_id"] = $post->id;
+        $data["user_id"] = $_SESSION["user"]->id;
 
         (new PostComment($post->id))->create($data);
 
