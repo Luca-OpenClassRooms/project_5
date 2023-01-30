@@ -6,6 +6,8 @@ use App\Controllers\Controller;
 
 class IndexController extends Controller
 {
+
+    
     /**
      * Display index
      *

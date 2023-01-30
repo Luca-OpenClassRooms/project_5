@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PostController extends Controller 
 {
+
+    
     /**
      * Display index
      *

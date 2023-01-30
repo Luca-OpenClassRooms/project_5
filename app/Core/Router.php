@@ -198,15 +198,13 @@ class Router
         $methodName = $controller[1];
 
         if (!class_exists($className)) {
-            echo "Controller not found.";
-            return;
+            return "Controller not found.";
         }
         
         $class = new $className();
 
         if (!method_exists($class, $methodName)) {
-            echo "Method controller not found.";
-            return;
+            return "Method controller not found.";
         }
 
         $reflexionClass = new \ReflectionClass($class);
@@ -233,6 +231,8 @@ class Router
             $args[] = $arg;
         }
 
-        echo call_user_func_array([$class, $methodName], $args);
+        return call_user_func_array([$class, $methodName], $args);
     }
+
+    
 }

@@ -19,6 +19,7 @@ class ContactController extends Controller
     {
         return $this->render("contact");
     }
+    
 
     /**
      * Send contact form

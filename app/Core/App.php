@@ -68,7 +68,10 @@ class App
         foreach($this->modules as $module)
         {
             if (method_exists($module, "run")) {
-                $res = $module->run();
+                $return = $module->run();
+
+                if( $module instanceof \App\Core\Router )
+                    $res = $return;
             }
         }
 

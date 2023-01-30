@@ -36,7 +36,7 @@ if (!function_exists("dd")) {
 }
 
 if (!function_exists("config")) {
-    function config(string $name = null)
+    function config(string $name = null): mixed
     {
         $instance = app("config");
 

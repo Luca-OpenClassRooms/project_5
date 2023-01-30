@@ -4,12 +4,15 @@ namespace App\Core;
 
 class Alert
 {
+
+
     public function __construct()
     {
         if (!isset($_SESSION["alerts"])) {
             $_SESSION["alerts"] = [];
         }
     }
+    
 
     /**
      * Add alert to session
@@ -36,4 +39,6 @@ class Alert
     {
         $_SESSION["alerts"] = [];
     }
+
+
 }

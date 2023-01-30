@@ -7,6 +7,7 @@ use PDOException;
 
 class Database
 {
+    
     private $pdo;
     
     /**
@@ -69,4 +70,6 @@ class Database
 
         return $req;
     }
+
+    
 }
