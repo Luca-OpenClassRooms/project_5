@@ -55,11 +55,11 @@ class Model
 
         switch ($lastChar) {
             case 'y':
-                return substr($name, 0, -1) . 'ies';
+                return substr($name, 0, -1).'ies';
             case 's':
-                return $name . 'es';
+                return $name.'es';
             default:
-                return $name .'s';
+                return $name.'s';
         }
 
         return $name;
