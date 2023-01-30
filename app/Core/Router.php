@@ -199,13 +199,29 @@ class Router
             return;
         }
 
+        $reflexionClass = new \ReflectionClass($class);
+        $reflexionMethod = $reflexionClass->getMethod($methodName);
+        $params = $reflexionMethod->getParameters();
 
-        $args = [
-            $this->request,
-            ...array_filter($parameters, function($v, $k){
-                return $k[0] != "_";
-            }, ARRAY_FILTER_USE_BOTH)
-        ];
+        $args = [];
+
+        foreach($params as $param){
+            $name = $param->getName();
+
+            $exist = array_search($name, array_keys($parameters));
+
+            $arg = null;
+
+            if( $exist !== false ){
+                $arg = $parameters[$name] ?? null;
+            }
+
+            if( $name == "request" ){
+                $arg = $this->request;
+            }
+
+            $args[] = $arg;
+        }
 
         echo call_user_func_array([$class, $methodName], $args);
     }

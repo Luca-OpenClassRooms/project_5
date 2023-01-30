@@ -117,10 +117,10 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach($data as $k => $v)
+        foreach(array_keys($data) as $v)
         {
-            $sqlTable .= "$k, ";
-            $sqlValue .= ":$k, ";
+            $sqlTable .= "$v, ";
+            $sqlValue .= ":$v, ";
         }
 
         $sqlTable = substr($sqlTable, 0, -2);
@@ -143,9 +143,9 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach($data as $k => $v)
+        foreach(array_keys($data) as $v)
         {
-            $sqlTable .= "$k = :$k, ";
+            $sqlTable .= "$v = :$v, ";
         }
 
         $sqlTable = substr($sqlTable, 0, -2);
