@@ -26,7 +26,7 @@ class Alert
 
         $_SESSION["alerts"][$type][] = $message;
     }
-    
+
     /**
      * Run the module
      *

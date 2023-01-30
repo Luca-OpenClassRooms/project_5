@@ -19,7 +19,7 @@ class PostController extends Controller
     {
         $post = (new Post)->find($slug);
 
-        if( !$post ) return redirect("index");
+        if (!$post) return redirect("index");
         
         $comments = (new PostComment($post->id, isset($_SESSION["user"]) && $_SESSION["user"]->is_admin))->paginate(
             $request->query->get("page", 1), 

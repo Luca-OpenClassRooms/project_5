@@ -226,7 +226,7 @@ class Router
                 $arg = $parameters[$name] ?? null;
             }
 
-            if ($name == "request") {
+            if ($name === "request") {
                 $arg = $this->request;
             }
 

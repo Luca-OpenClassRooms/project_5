@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function index()
     {
         return $this->render("auth/login");
-    }  
+    }
 
     /**
      * Try to authentification an user

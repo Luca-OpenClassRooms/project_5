@@ -10,7 +10,7 @@ class App
 
     public static function getInstance()
     {
-        if ( self::$_instance === null ) {
+        if (self::$_instance === null) {
             self::$_instance = new self();
         }
 
@@ -51,7 +51,7 @@ class App
 
         foreach($this->modules as $module)
         {
-            if( method_exists($module, "run") ){
+            if (method_exists($module, "run")) {
                 $res = $module->run();
             }
         }

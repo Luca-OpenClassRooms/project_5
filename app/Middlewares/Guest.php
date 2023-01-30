@@ -11,7 +11,7 @@ class Guest
      */
     public function process()
     {
-        if( isset($_SESSION["user"]) && !empty($_SESSION["user"]) )
+        if (isset($_SESSION["user"]) && !empty($_SESSION["user"]))
             return redirect("dashboard.index");
     }
 }

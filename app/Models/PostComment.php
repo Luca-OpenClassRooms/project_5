@@ -68,7 +68,7 @@ class PostComment extends Model
             "pages" => $pages,
             "current" => $current,
             "perPage" => $perPage,
-            "data" => $this->all(),
+            "data" => $this->all()
         ];
     }    
 }

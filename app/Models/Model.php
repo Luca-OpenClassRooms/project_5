@@ -6,6 +6,7 @@ use App\Core\App;
 
 class Model 
 {
+
     /**
      * Instance of database
      *
@@ -20,7 +21,11 @@ class Model
      */
     public $table = false;
 
-
+    /**
+     * Limit of query
+     *
+     * @var string
+     */
     protected $limit = "";
 
     public function __construct()
@@ -30,6 +35,7 @@ class Model
         $this->db = $app->get("database");        
         $this->table = $this->getTableName();
     }
+
 
     /**
      * Get table name plural
@@ -102,7 +108,7 @@ class Model
             "pages" => $pages,
             "current" => $current,
             "perPage" => $perPage,
-            "data" => $this->all(),
+            "data" => $this->all()
         ];
     }
 
@@ -154,10 +160,10 @@ class Model
         $this->db->query("UPDATE {$this->table} SET $sqlTable WHERE id = :id", [...$data, "id" => $id]);
 
         return (object) array_merge(["id" => $id], $data);
-    }    
+    }
 
     /**
-     * REmove a instance of model
+     * Remove a instance of model
      *
      * @param integer $id
      * @return void

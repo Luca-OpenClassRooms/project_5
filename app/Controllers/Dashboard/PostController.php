@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         $post = (new Post)->findBy("id", $id);
 
-        if( !$post )
+        if (!$post)
             return redirect("dashboard.posts.index");
 
         return $this->render("dashboard/posts/create", compact("post"));
@@ -87,7 +87,7 @@ class PostController extends Controller
         $data = $request->request->all();
         $post = (new Post)->findBy("id", $id);
 
-        if( !$post )
+        if (!$post)
             return redirect("dashboard.posts.index");
 
         $this->validate($request, [

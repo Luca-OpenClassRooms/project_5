@@ -4,21 +4,35 @@ namespace App\Controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use Twig\TwigFunction;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 use Rakit\Validation\Validator;
 
 class Controller 
 {
+
+    /**
+     * Twig loader
+     *
+     * @var FilesystemLoader
+     */
     private $loader;
+
+    /**
+     * Twig environment
+     *
+     * @var Environment
+     */
     private $twig;
 
     public function __construct()
     {
-        $this->loader = new \Twig\Loader\FilesystemLoader("../resources/views");
-        $this->twig = new \Twig\Environment($this->loader, ['cache' => false]);
+        $this->loader = new FilesystemLoader("../resources/views");
+        $this->twig = new Environment($this->loader, ['cache' => false]);
         $this->twig->addGlobal('session', $_SESSION);
         $this->twig->addGlobal('user', $_SESSION["user"] ?? false);
         $this->twig->addGlobal("is_admin", isset($_SESSION["user"]) && $_SESSION["user"]->is_admin);
-        $this->twig->addFunction(new TwigFunction("route", function(...$args){
+        $this->twig->addFunction(new TwigFunction("route", function (...$args) {
             return route(...$args);
         }));
     }

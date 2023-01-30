@@ -38,7 +38,7 @@ class RegisterController extends Controller
 
         $exist = (new User)->findBy("email", $data["email"]);
 
-        if( $exist ){
+        if ($exist) {
             alert("error", "Cette e-mail est déjà utilisé.");
             return back();
         }

@@ -19,9 +19,7 @@ class PostCommentController extends Controller
     {
         $data = $request->request->all();
 
-        $this->validate($request, [
-            "content" => "required|max:500",
-        ]);
+        $this->validate($request, ["content" => "required|max:500"]);
 
         $post = (new Post)->findBy("slug", $slug);
 
@@ -46,10 +44,10 @@ class PostCommentController extends Controller
     {
         $comment = (new PostComment(0))->find($id);
 
-        if( !$comment ) return back();
+        if (!$comment) return back();
 
         (new PostComment(0))->update($comment->id, [
-            "validated" => $comment->validated == 0 ? 1 : 0
+            "validated" => $comment->validated === 0 ? 1 : 0
         ]);
 
         alert("success", "Commentaire mise à jour avec succès");
@@ -66,7 +64,7 @@ class PostCommentController extends Controller
     {
         $comment = (new PostComment(0))->find($id);
 
-        if( !$comment ) return back();
+        if (!$comment) return back();
         
         (new PostComment(0))->delete($id);
 

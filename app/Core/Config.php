@@ -4,6 +4,12 @@ namespace App\Core;
 
 class Config
 {
+    
+    /**
+     * Config data
+     *
+     * @var array
+     */
     private $data = [];
 
     /**

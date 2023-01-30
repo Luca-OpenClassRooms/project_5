@@ -16,7 +16,7 @@ class Database
      */
     public function getPDO()
     {
-        if( $this->pdo != null )
+        if ($this->pdo != null)
             return $this->pdo;
 
         $host = config("database.host");
