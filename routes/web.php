@@ -16,13 +16,16 @@ $router->group([
     "prefix" => "comments",
     "as" => "comments.",
     "middleware" => ["admin"]
-], function($router){
+], function ($router) {
     $router->post("/{id}", "PostCommentController@update", "update");
     $router->post("/{id}/delete", "PostCommentController@destroy", "destroy");
 });
 
-$router->group(["prefix" => "auth", "as" => "auth."], function($router){
-    $router->group(["middleware" => ["guest"]], function($router){
+$router->group([
+    "prefix" => "auth", 
+    "as" => "auth."
+], function($router){
+    $router->group(["middleware" => ["guest"]], function ($router) {
         $router->get("/login", "Auth\LoginController@index", "login");
         $router->post("/login", "Auth\LoginController@authentificate", "authentificate");
 
@@ -30,7 +33,7 @@ $router->group(["prefix" => "auth", "as" => "auth."], function($router){
         $router->post("/register", "Auth\RegisterController@store", "register.store");
     });
     
-    $router->group(["middleware" => ["auth"]], function($router){
+    $router->group(["middleware" => ["auth"]], function ($router) {
         $router->post("/logout", "Auth\LoginController@logout", "logout");
     });
 });
@@ -41,7 +44,7 @@ $router->group([
     "prefix" => "dashboard", 
     "as" => "dashboard.",
     "middleware" => ["admin"]
-], function($router){
+], function ($router) {
     $router->get("", "Dashboard\IndexController@index", "index");
     $router->get("/posts", "Dashboard\PostController@index", "posts.index");
     

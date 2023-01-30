@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\App;
 
-class Model 
+class Model
 {
 
     /**

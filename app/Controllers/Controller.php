@@ -8,7 +8,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Rakit\Validation\Validator;
 
-class Controller 
+class Controller
 {
 
     /**
@@ -45,7 +45,7 @@ class Controller
      * @param array $params
      * @return void
      */
-    protected function render($view, $params = [])
+    protected function render($view, $params=[])
     {
         return $this->twig->render($view . ".html.twig", $params);
     }
