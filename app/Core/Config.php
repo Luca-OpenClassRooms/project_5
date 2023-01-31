@@ -24,7 +24,7 @@ class Config
 
         array_shift($part);
 
-        foreach($part as $p)
+        foreach ($part as $p)
         {
             $data = $data[$p];
         }
@@ -44,7 +44,7 @@ class Config
         array_shift($files);
         array_shift($files);
         
-        foreach($files as $file)
+        foreach ($files as $file)
         {
             $data = @require_once "../config/".$file;
             $name = str_replace(".php", "", $file);

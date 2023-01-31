@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\Post;
 use Symfony\Component\HttpFoundation\Request;
 
-class HomeController extends Controller 
+class HomeController extends Controller
 {
     /**
      * Display all posts

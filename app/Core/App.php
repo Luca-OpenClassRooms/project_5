@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-class App 
+class App
 {
     /**
      * Instance of the application
@@ -48,7 +48,7 @@ class App
      * Get instance of a module
      *
      * @param string $name
-     * @return void
+     * @return mixed
      */
     public function get(string $name)
     {
@@ -64,7 +64,7 @@ class App
     {
         $res = "";
 
-        foreach($this->modules as $module)
+        foreach ($this->modules as $module)
         {
             if (method_exists($module, "run")) {
                 $return = $module->run();

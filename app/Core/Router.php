@@ -120,7 +120,7 @@ class Router
 
         $callback($router);
 
-        foreach($router->routes->all() as $k => $route)
+        foreach ($router->routes->all() as $k => $route)
         {
             $route->setPath($prefix.$route->getPath());
             $currentMiddleware = $route->getDefault("_middleware") ?? [];
@@ -137,7 +137,7 @@ class Router
      * @param [type] ...$args
      * @return void
      */
-    public function url(string $name, $params = [])
+    public function url(string $name, $params=[])
     {
         $generator = new UrlGenerator($this->routes, $this->context);
         $route = $this->routes->get($name);
@@ -181,7 +181,7 @@ class Router
         if (count($middlewares) > 0) {
             $middlewareList = [];
 
-            foreach($middlewares as $middleware){
+            foreach ($middlewares as $middleware){
                 $class = "App\Middlewares\\".ucfirst(strtolower($middleware));
                 $middlewareList[] = new $class();
             }
@@ -212,7 +212,7 @@ class Router
 
         $args = [];
 
-        foreach($params as $param){
+        foreach ($params as $param){
             $name = $param->getName();
 
             $exist = array_search($name, array_keys($parameters));

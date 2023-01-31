@@ -6,7 +6,7 @@ use App\Controllers\Controller;
 use App\Models\Post;
 use Symfony\Component\HttpFoundation\Request;
 
-class PostController extends Controller 
+class PostController extends Controller
 {
     /**
      * Display index
