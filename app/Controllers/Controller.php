@@ -29,7 +29,7 @@ class Controller
         $this->loader = new FilesystemLoader("../resources/views");
         $this->twig = new Environment($this->loader, ['cache' => false]);
         $this->twig->addGlobal('session', $_SESSION);
-        $this->twig->addGlobal('user', $_SESSION["user"] ?? false);
+        $this->twig->addGlobal('user', isset($_SESSION["user"]) && !empty($_SESSION["user"]));
         $this->twig->addGlobal("is_admin", isset($_SESSION["user"]) && $_SESSION["user"]->is_admin);
         $this->twig->addFunction(new TwigFunction("route", function (...$args) {
             return route(...$args);

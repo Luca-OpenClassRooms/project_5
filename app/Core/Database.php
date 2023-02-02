@@ -25,7 +25,7 @@ class Database
         $password = config("database.password");
         $dbname = config("database.database");
         
-        try{
+        try {
             $pdo = new \PDO(
                 "mysql:dbname=$dbname;host=$host;port=$port", $username, $password, 
                 [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]

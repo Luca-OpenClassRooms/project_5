@@ -64,8 +64,7 @@ class App
     {
         $res = "";
 
-        foreach ($this->modules as $module)
-        {
+        foreach ($this->modules as $module) {
             if (method_exists($module, "run")) {
                 $return = $module->run();
 

@@ -15,7 +15,7 @@ if (!function_exists("app")) {
 }
 
 if (!function_exists("env")) {
-    function env(string $name, string $default = null)
+    function env(string $name, string $default=null)
     {
         if (isset($_ENV[$name]) && !empty($_ENV[$name])) {
             return $_ENV[$name];
@@ -36,7 +36,7 @@ if (!function_exists("dd")) {
 }
 
 if (!function_exists("config")) {
-    function config(string $name = null): mixed
+    function config(string $name=null): mixed
     {
         $instance = app("config");
 

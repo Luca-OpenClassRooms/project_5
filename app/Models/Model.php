@@ -122,8 +122,7 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach (array_keys($data) as $v)
-        {
+        foreach (array_keys($data) as $v) {
             $sqlTable .= "$v, ";
             $sqlValue .= ":$v, ";
         }
@@ -148,8 +147,7 @@ class Model
         $sqlTable = "";
         $sqlValue = "";
         
-        foreach (array_keys($data) as $v)
-        {
+        foreach (array_keys($data) as $v) {
             $sqlTable .= "$v = :$v, ";
         }
 
