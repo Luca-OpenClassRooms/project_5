@@ -17,6 +17,7 @@
         "twig/twig": "^3.5",
         "vlucas/phpdotenv": "^5.5",
         "rakit/validation": "^1.4",
-        "symfony/mailer": "^6.2"
+        "symfony/mailer": "^6.2",
+        "tleckie/url-signer": "^1.0"
     }
 }

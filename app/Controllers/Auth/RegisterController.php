@@ -6,6 +6,10 @@ use App\Controllers\Controller;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Request;
 
+use Tleckie\UrlSigner\Exception\UnsignedException;
+use Tleckie\UrlSigner\Exception\ExpiredUriException;
+use Tleckie\UrlSigner\Signer;
+
 class RegisterController extends Controller
 {
     /**
@@ -50,9 +54,51 @@ class RegisterController extends Controller
             "password" => password_hash($data["password"], PASSWORD_BCRYPT),
         ]);
 
-        $_SESSION["user"] = (new User)->findBy("id", $user->id);
+        $signer = new Signer(env("APP_SECRET"), 'signature');
 
-        alert("success", "Inscription effectuée.");
-        return redirect("index");
+        $mailer = app("mailer");
+
+        $email = $mailer->email()
+            ->from($user->email)
+            ->to(env("MAIL_FROM_ADDRESS"))
+            ->subject("Confirmation de votre adresse e-mail")
+            ->html($this->render("emails/confirmation", [
+                "user" => $user,
+                "url" => $signer->sign(url("auth.confirm", ["email" => $user->email]))
+            ]));
+
+        $mailer->send($email);
+
+        alert("success", "Inscription effectuée, un e-mail de confirmation vous a été envoyé.");
+        return redirect("auth.login");
+    }
+
+    public function confirm(Request $request)
+    {
+        $path = urldecode($request->getRequestUri());
+        $fullPath = rtrim(env("APP_URL", "/")).$path;
+     
+        $signer = new Signer(env("APP_SECRET"), 'signature');
+
+        try {
+            $signer->validate($fullPath);
+        } catch(ExpiredUriException $exception) {
+            return redirect("index");
+        } catch(UnsignedException $exception) {
+            return redirect("index");
+        }
+        
+        $user = (new User)->findBy("email", $request->get("email"));
+
+        if (!$user) {
+            return redirect("index");
+        }
+
+        (new User)->update($user->id, [
+            "email_verified_at" => date("Y-m-d H:i:s")
+        ]);
+
+        alert("success", "Votre compte a été activé.");
+        return redirect("auth.login");
     }
 }

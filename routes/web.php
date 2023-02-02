@@ -25,6 +25,8 @@ $router->group([
     "prefix" => "auth",
     "as" => "auth."
 ], function($router){
+    $router->get("/confirm", "Auth\RegisterController@confirm", "confirm");
+
     $router->group(["middleware" => ["guest"]], function ($router) {
         $router->get("/login", "Auth\LoginController@index", "login");
         $router->post("/login", "Auth\LoginController@authentificate", "authentificate");

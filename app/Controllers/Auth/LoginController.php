@@ -46,6 +46,11 @@ class LoginController extends Controller
             return back();
         }
 
+        if ($user->email_verified_at === null) {
+            alert("error", "Veuillez confirmer votre adresse e-mail.");
+            return back();
+        }
+
         $_SESSION["user"] = $user;
 
         alert("success", "Connexion effectuée.");
