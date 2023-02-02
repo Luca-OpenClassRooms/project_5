@@ -32,6 +32,11 @@ class App
         return self::$_instance;
     }
 
+    public function __construct()
+    {
+        include_once "../app/functions.php";
+    }
+
     /**
      * Register a new module
      *

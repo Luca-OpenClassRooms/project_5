@@ -79,3 +79,24 @@ if (!function_exists("redirect")) {
         exit(0);
     }
 }
+
+if (!function_exists("str_random")) {
+    function str_random(int $length): string
+    {
+        $alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $str = "";
+
+        for ($i=0; $i < $length; $i++) { 
+            $str .= $alphabet[rand(0, strlen($alphabet)-1)];
+        }
+
+        return $str;
+    }
+}
+
+if (!function_exists("url")) {
+    function url(...$args): string
+    {
+        return rtrim(env("APP_URL"), "/").route(...$args);
+    }
+}

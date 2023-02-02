@@ -11,6 +11,20 @@ class Config
      */
     private $data = [];
 
+    public function __construct()
+    {
+        $files = scandir("../config");
+        array_shift($files);
+        array_shift($files);
+        
+        foreach ($files as $file) {
+            $data = @include_once "../config/".$file;
+            $name = str_replace(".php", "", $file);
+
+            $this->data[$name] = $data;
+        }
+    }
+
     /**
      * Get a config value
      *
@@ -29,25 +43,5 @@ class Config
         }
 
         return $data;
-    }
-
-
-    /**
-     * Run the module
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $files = scandir("../config");
-        array_shift($files);
-        array_shift($files);
-        
-        foreach ($files as $file) {
-            $data = @include_once "../config/".$file;
-            $name = str_replace(".php", "", $file);
-
-            $this->data[$name] = $data;
-        }
     }
 }

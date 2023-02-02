@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% set cta_title = "Réinitialisation de votre mot de passe" %}
+{% set cta_description = "Remplissez le formulaire ci-dessous afin de réinitialiser votre mot de passe." %}
+
+{% block content %}
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container single-col-max-width">
+        <form action="" method="POST" class="d-flex flex-column gap-4">
+            <div class="form-group">
+                <label for="password" class="mb-2">Mot de passe</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="*****" /> 
+            </div>
+            
+
+            <div class="form-group">
+                <label for="password_confirmation" class="mb-2">Confirmez votre mot de passe</label>
+                <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" placeholder="*****" /> 
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Réinitialiser</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

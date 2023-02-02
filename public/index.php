@@ -17,7 +17,6 @@ $app->register("config", \App\Core\Config::class);
 $app->register("database", \App\Core\Database::class);
 $app->register("router", \App\Core\Router::class);
 $app->register("alert", \App\Core\Alert::class);
-
-require_once "../app/functions.php";
+$app->register("mailer", \App\Core\Mailer::class);
 
 echo $app->run();

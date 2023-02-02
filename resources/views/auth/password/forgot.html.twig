@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% set cta_title = "Mot de passe oublié ?" %}
+{% set cta_description = "Completez le formulaire ci-dessous afin de récupérer votre mot de passe." %}
+
+{% block content %}
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container single-col-max-width">
+        <form action="" method="POST" class="d-flex flex-column gap-4">
+            <div class="form-group">
+                <label for="email" class="mb-2">E-mail</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="Ex: john.doe@gmail.com" /> 
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Envoyer un lien</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -34,6 +34,9 @@ class Controller
         $this->twig->addFunction(new TwigFunction("route", function (...$args) {
             return route(...$args);
         }));
+        $this->twig->addFunction(new TwigFunction("url", function (...$args) {
+            return url(...$args);
+        }));
     }
 
     

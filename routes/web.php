@@ -31,14 +31,17 @@ $router->group([
 
         $router->get("/register", "Auth\RegisterController@index", "register");
         $router->post("/register", "Auth\RegisterController@store", "register.store");
+        
+        $router->get("/password/forgot", "Auth\PasswordForgotController@index", "password.forgot");
+        $router->post("/password/forgot", "Auth\PasswordForgotController@store", "password.forgot.store");
+        $router->get("/password/reset/{token}", "Auth\PasswordResetController@index", "password.reset");
+        $router->post("/password/reset/{token}", "Auth\PasswordResetController@store", "password.reset.store");
     });
     
     $router->group(["middleware" => ["auth"]], function ($router) {
         $router->post("/logout", "Auth\LoginController@logout", "logout");
     });
 });
-
-$router->get("/seed", "SeederController@index", "seed.index");
 
 $router->group([
     "prefix" => "dashboard", 
