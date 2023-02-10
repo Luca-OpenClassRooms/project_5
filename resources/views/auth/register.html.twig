@@ -7,6 +7,8 @@
 <section class="blog-list px-3 py-5 p-md-5">
     <div class="container single-col-max-width">
         <form action="{{ route('auth.register.store') }}" method="POST" class="d-flex flex-column gap-4">
+            {{ csrf_token()|raw }}
+            
             <div class="d-flex gap-2">
                 <div class="form-group flex-fill">
                     <label for="first_name" class="mb-2">Prénom</label>

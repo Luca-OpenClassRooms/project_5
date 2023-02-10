@@ -176,18 +176,17 @@ class Router
         $parameters = $matcher->match($context->getPathInfo());
 
         $middlewares = $parameters["_middleware"] ?? [];
+        $middlewares[] = "Csrf";
+        
+        $middlewareList = [];
 
-        if (count($middlewares) > 0) {
-            $middlewareList = [];
+        foreach ($middlewares as $middleware) {
+            $class = "App\Middlewares\\".ucfirst(strtolower($middleware));
+            $middlewareList[] = new $class();
+        }
 
-            foreach ($middlewares as $middleware) {
-                $class = "App\Middlewares\\".ucfirst(strtolower($middleware));
-                $middlewareList[] = new $class();
-            }
-
-            foreach ($middlewareList as $middleware) {
-                $middleware->process($this->request);
-            }
+        foreach ($middlewareList as $middleware) {
+            $middleware->process($this->request);
         }
 
         $controller = explode("@", $parameters["_controller"]);

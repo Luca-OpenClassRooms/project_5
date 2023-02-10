@@ -10,6 +10,8 @@
 {% block childcontent %}
 <div>
     <form action="{{ url }}" method="POST" class="d-flex flex-column gap-4">
+        {{ csrf_token()|raw }}
+        
         <div class="d-flex gap-2">
             <div class="form-group flex-fill">
                 <label for="title" class="mb-2">Titre</label>

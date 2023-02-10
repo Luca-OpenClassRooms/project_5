@@ -119,6 +119,9 @@ class Model
      */
     public function create(array $data)
     {
+        if( isset($data["_csrf"]) )
+            unset($data["_csrf"]);
+
         $sqlTable = "";
         $sqlValue = "";
         
@@ -144,6 +147,9 @@ class Model
      */
     public function update(int $id, array $data)
     {
+        if( isset($data["_csrf"]) )
+            unset($data["_csrf"]);
+
         $sqlTable = "";
         $sqlValue = "";
         

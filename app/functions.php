@@ -100,3 +100,10 @@ if (!function_exists("url")) {
         return rtrim(env("APP_URL"), "/").route(...$args);
     }
 }
+
+if (!function_exists("csrf_token")) {
+    function csrf_token(string $field = "csrf")
+    {   
+        return "<input type='hidden' name='_csrf' value='".$_SESSION[$field]."'>";
+    }
+}

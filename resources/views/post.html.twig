@@ -35,6 +35,8 @@
 
                             {% if is_admin %}
                                 <form action="{{ route('comments.update', comment.id) }}" method="POST">
+                                    {{ csrf_token()|raw }}
+
                                     <button type="submit" class="btn-link p-0">
                                         {% if comment.validated %}
                                             <i class="fa-solid fa-xmark"></i>
@@ -44,6 +46,8 @@
                                     </button>
                                 </form>
                                 <form action="{{ route('comments.destroy', comment.id) }}" method="POST">
+                                    {{ csrf_token()|raw }}
+                                    
                                     <button type="submit" class="btn-link p-0">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
@@ -87,6 +91,7 @@
             {% if user %}
                 <form action="{{ route('comments.store', post.slug) }}" method="POST" class="d-flex flex-column gap-4">
                     <div class="form-group">
+                        {{ csrf_token()|raw }}
                         <label for="content" class="mb-2">Message</label>
                         <textarea name="content" id="content" rows="3" class="form-control" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, culpa!"></textarea>
                     </div>

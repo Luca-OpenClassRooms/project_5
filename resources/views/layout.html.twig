@@ -59,6 +59,7 @@
 				<div class="my-2 my-md-3 w-100">
 					{% if user %}
 						<form action="{{ route('auth.logout') }}" method="POST">
+							{{ csrf_token()|raw }}
 							<button type="submit" class="btn btn-danger w-100"><i class="fas fa-right-from-bracket fa-fw me-2"></i>Déconnexion</button>
 						</form>
 					{% else %}

@@ -37,6 +37,9 @@ class Controller
         $this->twig->addFunction(new TwigFunction("url", function (...$args) {
             return url(...$args);
         }));
+        $this->twig->addFunction(new TwigFunction("csrf_token", function (...$args) {
+            return csrf_token(...$args);
+        }));
     }
 
     
