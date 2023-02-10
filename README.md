@@ -32,3 +32,20 @@ php serve.php
 ```
 
 If you use a web server, you can use the public folder as the root folder.
+
+## Use db test
+
+You can use the db test in the file db_test.sql
+
+### Admin user
+
+```
+email: root@root.fr
+password: root
+```
+
+### Default user
+```
+email: test@test.fr
+password: test
+```
