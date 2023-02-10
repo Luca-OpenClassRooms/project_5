@@ -20,7 +20,7 @@ class User
 
         $dbUser = (new ModelsUser)->findBy("id", $user->id);
 
-        if( !$dbUser ){
+        if (!$dbUser) {
             unset($_SESSION["user"]);
             return true;
         }

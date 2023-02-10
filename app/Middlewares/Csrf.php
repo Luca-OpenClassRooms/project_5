@@ -6,9 +6,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Csrf
 {
+    /**
+     * Name of the form key
+     *
+     * @var string
+     */
     private $formKey = "_csrf";
 
+
+    /**
+     * Name of the session key
+     *
+     * @var string
+     */
     private $sessionKey = "csrf";
+
 
     /**
      * Process middleware
@@ -17,16 +29,16 @@ class Csrf
      */
     public function process(Request $request)
     {
-        if( in_array($request->getMethod(), ["POST", "PUT", "DELETE"]) ) {
+        if (in_array($request->getMethod(), ["POST", "PUT", "DELETE"])) {
             $params = $request->request->all();
 
-            if( !isset($params[$this->formKey]) || empty($params[$this->formKey]) )
+            if (!isset($params[$this->formKey]) || empty($params[$this->formKey]))
                 return $this->reject("CSRF token not found");
 
-            if( !isset($_SESSION[$this->sessionKey]) || empty($_SESSION[$this->sessionKey]) )
+            if (!isset($_SESSION[$this->sessionKey]) || empty($_SESSION[$this->sessionKey]))
                 return $this->reject("CSRF token not found");
 
-            if( $params[$this->formKey] !== $_SESSION[$this->sessionKey] )
+            if ($params[$this->formKey] !== $_SESSION[$this->sessionKey])
                 return $this->reject("CSRF token mismatch");
         } else {
             $this->generateToken();
@@ -51,7 +63,7 @@ class Csrf
      * @param string $str
      * @return void
      */
-    private function reject(string $str = "Invalid CSRF token")
+    private function reject(string $str="Invalid CSRF token")
     {
         alert("error", $str);
         return back();
