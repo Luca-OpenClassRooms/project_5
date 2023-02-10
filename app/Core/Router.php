@@ -177,6 +177,7 @@ class Router
 
         $middlewares = $parameters["_middleware"] ?? [];
         $middlewares[] = "Csrf";
+        $middlewares[] = "User";
         
         $middlewareList = [];
 
